@@ -5,11 +5,12 @@ import emailFilter from '../cmps/email-filter.cmp.js';
 
 export default {
     template: `
-        <section class="email-app">
+        <section class="email-app app-main">
             <email-folder-list/>
-            <email-filter @filtered="setFilter"/>
-            <email-list :emails="emailsToShow" />
-    
+            <div class="email-content">
+                <email-filter @filtered="setFilter"/>
+                <email-list :emails="emailsToShow" />
+            </div>
         </section>
     `,
     data() {
