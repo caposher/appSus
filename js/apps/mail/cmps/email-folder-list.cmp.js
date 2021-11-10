@@ -1,7 +1,7 @@
 export default {
     template: `
-        <section class="email-folders flex column">
-            <button class="compose">Compose</button>
+        <section class="email-folders">
+            <button class="compose">+ Compose</button>
             <div class="inbox">
                 <span> <i class="fas fa-inbox"></i> </span> 
                 Inbox
