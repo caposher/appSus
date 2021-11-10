@@ -5,7 +5,7 @@ export default {
   template: `
     <section v-if="notes" class="keep-app main-content flex justify-center">
         <div class="nots-container main-width">
-          <notePreview v-for="(note, idx) in notes" :key="idx" :txt="note"/>
+          <notePreview @removed="removedNode" v-for="note in notes" :key="note.id" :note="note"/>
         </div>
     </section>
   `,
@@ -15,8 +15,17 @@ export default {
     };
   },
   created() {
-    notesService.getNotes().then((notes) => (this.notes = notes));
+    this.getNotes();
   },
+  methods: {
+    getNotes() {
+      notesService.getNotes().then((notes) => (this.notes = notes));
+    },
+    removedNode(id) {
+      notesService.removeNote(id).then(() => this.getNotes());
+    },
+  },
+
   components: {
     notePreview,
   },

@@ -1,18 +1,68 @@
 import { storageService } from '../../../services/async-storage-service.js';
-export const notesService = { getNotes };
+export const notesService = { getNotes, addNote, removeNote };
 
 const NOTES_KEY = 'notes';
 const gList = [
-  '1Lorem ipsum dolor sit amet consectetur ',
-  '2Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias nobis illo esse iste eum culpa quaerat commodi excepturi aperiam suscipit praesentium incidunt, dignissimos voluptatem sit ea delectus, quos aut.',
-  '3Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias nobis illo esse iste eum culpa quaerat commodi excepturi aperiam suscipit praesentium incidunt, dignissimos voluptatem sit ea delectus, quos autorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias nobis illo esse iste eum culpa quaerat commodi excepturi aperiam suscipit praesentium incidunt, dignissimos voluptatem sit ea delectus, quos aut.',
-  '4Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias nobis illo esse iste eum culpa quaerat commodi excepturi aperiam suscipit praesentium incidunt, dignissimos voluptatem sit ea delectus, quos aut.',
-  '5Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias nobis illo esse iste eum culpa quaerat commodi excepturi aperiam suscipit praesentium incidunt, dignissimos voluptatem sit ea delectus, quos aut.',
-  '6Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias nobis illo esse iste eum culpa quaerat commodi excepturi aperiam suscipit praesentium incidunt, dignissimos voluptatem sit ea delectus, quos aut.',
+  {
+    id: 'n101',
+    type: 'note-txt',
+    isPinned: true,
+    info: {
+      txt: 'Fullstack Me Baby!',
+    },
+  },
+  {
+    id: 'n102',
+    type: 'note-txt',
+    isPinned: true,
+    info: {
+      txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
+    },
+  },
+  {
+    id: 'n103',
+    type: 'note-txt',
+    isPinned: true,
+    info: {
+      txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
+    },
+  },
+  {
+    id: 'n104',
+    type: 'note-txt',
+    isPinned: true,
+    info: {
+      txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
+    },
+  },
+  {
+    id: 'n105',
+    type: 'note-txt',
+    isPinned: true,
+    info: {
+      txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
+    },
+  },
+  {
+    id: 'n106',
+    type: 'note-txt',
+    isPinned: true,
+    info: {
+      txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
+    },
+  },
 ];
 
 localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
 
 function getNotes() {
   return storageService.query(NOTES_KEY);
+}
+
+function addNote(note) {
+  storageService.post(NOTES_KEY, note);
+}
+
+function removeNote(noteId) {
+  return storageService.remove(NOTES_KEY, noteId);
 }

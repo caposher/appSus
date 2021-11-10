@@ -1,9 +1,12 @@
 export default {
-  props: ['txt'],
+  props: ['note'],
   name: 'note-preview',
-  template: ` <section class="note-preview">
+  template: ` <section class="note-preview flex flex-column flex-space-between">
                 <div class="notes-container">
-                  <p>{{txt}}</p>
+                  <p>{{note.info.txt}}</p>
+                </div>
+                <div class="note-tools">
+                  <button @click="$emit('removed',note.id)">🗑️</button>
                 </div>
               </section>`,
 };
