@@ -1,0 +1,22 @@
+.emails-list {
+  /* clean-list */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .email-preview { */
+/* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+/* } */
+
+.email-preview-container {
+  /* box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%); */
+  box-shadow: inset 0px 0px 12px -3px rgba(115, 115, 115, 0.86);
+  padding: 10px 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
