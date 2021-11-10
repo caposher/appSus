@@ -4,10 +4,10 @@ export default {
                 <div class="input-container main-width flex ">
                   <!-- <input type="text" v-model="note.info.txt" placeHolder="Enter text here">        -->
                   <textarea type="text"   v-model="note.info.txt" placeHolder="Enter text here"/>       
-                  <img @click="newNote" src="js/apps/keep/imgs/go.png">          
+                  <img @click="newNote" src="imgs/go.png">          
                   <ul class="flex">
                     <li  v-for="item in inputTypes" :key="item">
-                      <img :src="'js/apps/keep/imgs/'+item + '.png'">
+                      <img :src="'imgs/'+item + '.png'">
                     </li>
                   </ul>
                 </div>

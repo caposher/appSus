@@ -6,7 +6,8 @@ export default {
                   <p>{{note.info.txt}}</p>
                 </div>
                 <div class="note-tools">
-                  <button @click="$emit('removed',note.id)">🗑️</button>
+                  <img @click="$emit('removed',note.id)" src="imgs/delete.png"/>
+                  <img @click="$emit('edit',note.id)" src="imgs/edit.png"/>
                 </div>
               </section>`,
 };

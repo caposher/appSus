@@ -8,7 +8,7 @@ export default {
     <section v-if="notes" class="keep-app main-content flex flex-column item-center ">
         <noteInput @new-note="setNewNote"/>
         <div class="nots-container main-width">
-          <notePreview @removed="removedNote" v-for="note in notes" :key="note.id" :note="note"/>
+          <notePreview @removed="removedNote" @edit="editNote" v-for="note in notes" :key="note.id" :note="note"/>
         </div>
     </section>
   `,
@@ -29,6 +29,10 @@ export default {
     },
     setNewNote(note) {
       notesService.addNote(note).then(() => this.getNotes());
+    },
+    editNote(id) {
+      let note = this.notes.find((note) => note.id === id);
+      // TODO: finish the logic
     },
   },
 
