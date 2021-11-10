@@ -1,5 +1,5 @@
 import homePage from './pages/home-page.cmp.js';
-import emailPage from './pages/email-app.cmp.js';
+import emailPage from '../js/apps/mail/pages/email-app.cmp.js';
 import keepPage from './pages/keep-app.cmp.js';
 
 const routes = [
