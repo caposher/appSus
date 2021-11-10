@@ -1,11 +1,10 @@
-.keep-app {
-  padding-block-start: 30px;
-}
-
 .nots-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-auto-rows: min-content;
+  /* grid-auto-rows: 500px; */
   grid-auto-flow: dense;
+  justify-content: center;
   gap: 15px;
+  padding: 30px 0px;
 }

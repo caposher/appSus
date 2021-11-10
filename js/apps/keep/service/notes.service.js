@@ -60,7 +60,7 @@ function getNotes() {
 }
 
 function addNote(note) {
-  storageService.post(NOTES_KEY, note);
+  return storageService.post(NOTES_KEY, note);
 }
 
 function removeNote(noteId) {

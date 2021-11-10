@@ -32,6 +32,15 @@ a:hover {
   box-shadow: 0px 3px 0 hsl(200, 53%, 80%);
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+}
+
 button {
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -42,6 +51,8 @@ button {
   min-height: 80vh;
 }
 
-.main-width {
-  max-width: calc(100% - 200px);
+@media (min-width: 500px) {
+  .main-width {
+    max-width: calc(100% - 200px);
+  }
 }
