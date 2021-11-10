@@ -1,0 +1,24 @@
+.note-preview {
+  max-width: 300px;
+  background-color: bisque;
+  padding: 10px;
+  gap: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px black;
+}
+
+.note-tools {
+  background-color: hsl(33, 50%, 78%);
+  padding: 5px;
+}
+
+.note-tools img {
+  /* border-radius: 50%; */
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+}
+.note-tools img:hover {
+  background-color: hsl(33, 50%, 88%);
+  box-shadow: 0px 0px 2px black;
+}
