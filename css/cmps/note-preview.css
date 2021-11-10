@@ -1,0 +1,6 @@
+.note-preview {
+  max-width: 300px;
+  background-color: bisque;
+  padding: 10px;
+  display: inline-block;
+}
