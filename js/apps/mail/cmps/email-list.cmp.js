@@ -1,15 +1,19 @@
 import emailPreview from '../cmps/email-preview.cmp.js';
 
 export default {
+    name: 'email-list',
     props: ['emails'],
     template: `
         <ul class="emails-list">
-                <email-preview v-for="email in emails" :key="email.id" :email = "email"/>
+                <email-preview @remove="deleteEmail" v-for="email in emails" :key="email.id" :email = "email"/>
            
-            </li>
+            <!-- </li> -->
         </ul>
     `,
     methods: {
+        deleteEmail(emailId) {
+            this.$emit('removeEmail', emailId);
+        }
     },
     components: {
         emailPreview
