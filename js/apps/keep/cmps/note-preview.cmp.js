@@ -7,24 +7,24 @@ export default {
                 </div>
                 <div :class="noteToolsColor" class="note-tools">
                   <span @click="$emit('removed',note.id)"> <i class="far fa-trash-alt"></i> </span>
-                  <span @click="$emit('edit',note.id)"> <i class="far fa-edit"></i></span>
-                  <span @click="showColor=true"> <i class="fas fa-palette"></i></span>
-                  <div v-show='showColor' :class="noteToolsColor" class="pallete">
+                  <span @click="$emit('showModel',note)"> <i class="far fa-edit"></i></span>
+                  <span @click="showColors=true"> <i class="fas fa-palette"></i></span>
+                  <div v-show='showColors' :class="noteToolsColor" class="pallete">
                       <div @click="changeColor(num)" class="pallete-color color" :class="'color'+ num" v-for="(num in colors" :key="num"  ></div>
                   </div>
                 </div>
+
               </section>`,
   data() {
     return {
       colors: 6,
-      selected: 1,
-      showColor: false,
+      showColors: false,
     };
   },
   methods: {
     changeColor(color) {
       this.note.color = color;
-      //TODO:update server
+      this.$emit('updated', this.note);
     },
   },
   computed: {
@@ -37,11 +37,11 @@ export default {
       return noteSize;
     },
     noteColor() {
-      this.showColor = false;
+      this.showColors = false;
       return `color${this.note.color}`;
     },
     noteToolsColor() {
-      this.showColor = false;
+      this.showColors = false;
       return `color-tool${this.note.color}`;
     },
   },

@@ -18,6 +18,7 @@ export default {
       note: {
         type: 'text',
         isPinned: false,
+        color: 1,
         info: {
           txt: '',
         },
@@ -32,6 +33,7 @@ export default {
         this.note = {
           type: 'text',
           isPinned: false,
+          color: 1,
           info: {
             txt: '',
           },

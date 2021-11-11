@@ -1,5 +1,5 @@
 import { storageService } from '../../../services/async-storage-service.js';
-export const notesService = { getNotes, addNote, removeNote };
+export const notesService = { getNotes, addNote, removeNote, updateNote };
 
 const NOTES_KEY = 'notes';
 const gList = [
@@ -59,16 +59,20 @@ const gList = [
   },
 ];
 
-localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
+// localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
 
 function getNotes() {
   return storageService.query(NOTES_KEY);
 }
 
 function addNote(note) {
-  return storageService.post(NOTES_KEY, note);
+  return storageService.post(NOTES_KEY, note).then(() => getNotes());
 }
 
 function removeNote(noteId) {
-  return storageService.remove(NOTES_KEY, noteId);
+  return storageService.remove(NOTES_KEY, noteId).then(() => getNotes());
+}
+
+function updateNote(note) {
+  return storageService.put(NOTES_KEY, note).then(() => getNotes());
 }
