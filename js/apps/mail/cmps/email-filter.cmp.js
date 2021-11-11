@@ -1,11 +1,13 @@
 export default {
+    name: 'email-filter',
     template: `
         <div class="email-filter">
-            <input class="input-search" @input="filter" v-model="filterBy.text" type="text" placeholder="Search...">
-            <select class="filter-select" v-model="filterBy.isRead" >
-                   <option value='' selected>All</option>
-                   <option value='true'>Read</option>
-                   <option value='false'>Unread</option>
+            <!-- <i class="fas fa-search"></i>> -->
+            <input class="input-search" @input="filter" v-model="filterBy.text" type="text" placeholder="Search..." />
+            <select class="filter-select" v-model="filterBy.emailStatus" @change="filter" >
+                   <option value="" selected>All</option>
+                   <option value="read">Read</option>
+                   <option value="unread">Unread</option>
              </select>
         </div>
     `,
@@ -13,14 +15,14 @@ export default {
         return {
             filterBy: {
                 text: '',
-                isRead: ''
+                emailStatus: ''
             }
         };
     },
     methods: {
         filter() {
+            // console.log(this.filterBy.emailStatus);
             this.$emit('filtered', { ...this.filterBy });
-
         }
     }
 }
