@@ -1,5 +1,3 @@
-import noteColor from './note-color.cmp.js';
-
 export default {
   props: ['note'],
   name: 'note-preview',
@@ -12,7 +10,7 @@ export default {
                   <span @click="$emit('edit',note.id)"> <i class="far fa-edit"></i></span>
                   <span @click="showColor=true"> <i class="fas fa-palette"></i></span>
                   <div v-show='showColor' :class="noteToolsColor" class="pallete">
-                      <div @click="selected=num" class="pallete-color color" :class="'color'+ num" v-for="(num in colors" :key="num"  ></div>
+                      <div @click="changeColor(num)" class="pallete-color color" :class="'color'+ num" v-for="(num in colors" :key="num"  ></div>
                   </div>
                 </div>
               </section>`,
@@ -23,7 +21,12 @@ export default {
       showColor: false,
     };
   },
-  methods: {},
+  methods: {
+    changeColor(color) {
+      this.note.color = color;
+      //TODO:update server
+    },
+  },
   computed: {
     noteSize() {
       let noteSize;
@@ -35,11 +38,11 @@ export default {
     },
     noteColor() {
       this.showColor = false;
-      return `color${this.selected}`;
+      return `color${this.note.color}`;
     },
     noteToolsColor() {
       this.showColor = false;
-      return `color-tool${this.selected}`;
+      return `color-tool${this.note.color}`;
     },
   },
 };
