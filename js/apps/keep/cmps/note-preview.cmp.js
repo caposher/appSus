@@ -1,16 +1,29 @@
+import noteColor from './note-color.cmp.js';
+
 export default {
   props: ['note'],
   name: 'note-preview',
-  template: ` <section :class="noteSize" class="note-preview flex flex-column content-center space-between">
+  template: ` <section :class="[noteSize, noteColor]" class="note-preview flex flex-column content-center space-between">
                 <div  class="notes-container">
                   <p>{{note.info.txt}}</p>
                 </div>
-                <div class="note-tools">
-                  <img @click="$emit('removed',note.id)" src="imgs/delete.png"/>
-                  <img @click="$emit('edit',note.id)" src="imgs/edit.png"/>
+                <div :class="noteToolsColor" class="note-tools">
+                  <span @click="$emit('removed',note.id)"> <i class="far fa-trash-alt"></i> </span>
+                  <span @click="$emit('edit',note.id)"> <i class="far fa-edit"></i></span>
+                  <span @click="showColor=true"> <i class="fas fa-palette"></i></span>
+                  <div v-show='showColor' :class="noteToolsColor" class="pallete">
+                      <div @click="selected=num" class="pallete-color color" :class="'color'+ num" v-for="(num in colors" :key="num"  ></div>
+                  </div>
                 </div>
               </section>`,
-
+  data() {
+    return {
+      colors: 6,
+      selected: 1,
+      showColor: false,
+    };
+  },
+  methods: {},
   computed: {
     noteSize() {
       let noteSize;
@@ -19,6 +32,14 @@ export default {
       else if (txtLen < 300) noteSize = 'medium-note';
       else noteSize = 'large-note';
       return noteSize;
+    },
+    noteColor() {
+      this.showColor = false;
+      return `color${this.selected}`;
+    },
+    noteToolsColor() {
+      this.showColor = false;
+      return `color-tool${this.selected}`;
     },
   },
 };

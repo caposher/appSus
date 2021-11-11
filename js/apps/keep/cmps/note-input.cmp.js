@@ -4,10 +4,11 @@ export default {
                 <div class="input-container main-width flex ">
                   <!-- <input type="text" v-model="note.info.txt" placeHolder="Enter text here">        -->
                   <textarea type="text"   v-model="note.info.txt" placeHolder="Enter text here"/>       
-                  <img @click="newNote" src="imgs/go.png">          
+                  <span @click="newNote"><i class="fas fa-chevron-circle-right"></i></span>
+                  <!-- <img @click="newNote" src="imgs/go.png">           -->
                   <ul class="flex">
                     <li  v-for="item in inputTypes" :key="item">
-                      <img :src="'imgs/'+item + '.png'">
+                      <span><i :class="'fas ' + item "></i></span>
                     </li>
                   </ul>
                 </div>
@@ -21,7 +22,7 @@ export default {
           txt: '',
         },
       },
-      inputTypes: ['font', 'gallery', 'youtube'],
+      inputTypes: ['fa-font', 'fa-file-image', 'fa-video'],
     };
   },
   methods: {
@@ -38,4 +39,5 @@ export default {
       }
     },
   },
+  computed: {},
 };
