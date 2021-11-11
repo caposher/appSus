@@ -40,7 +40,8 @@ export default {
           const txtLen = this.note.info.txt.length;
           if (txtLen < 100) noteSize = 'smallest-note ';
           else if (txtLen < 200) noteSize = 'small-note';
-          else if (txtLen < 400) noteSize = 'medium-note';
+          else if (txtLen < 350) noteSize = 'normal-note';
+          else if (txtLen < 500) noteSize = 'medium-note';
           else if (txtLen < 800) noteSize = 'large-note';
           else noteSize = 'xl-note';
           break;

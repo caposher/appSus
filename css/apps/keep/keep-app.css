@@ -5,15 +5,19 @@
   grid-auto-flow: dense;
   justify-content: center;
   gap: 15px;
-  padding: 30px 0px;
+  padding-block-end: 30px;
 }
 
 .smallest-note {
-  grid-row: span 7;
+  grid-row: span 5;
 }
 
 .small-note {
   grid-row: span 10;
+}
+
+.normal-note {
+  grid-row: span 15;
 }
 
 .medium-note {
