@@ -53,6 +53,13 @@ button {
   min-height: 80vh;
 }
 
+.user-msg {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  padding: 10px;
+}
+
 @media (min-width: 500px) {
   .main-width {
     max-width: calc(100% - 200px);
