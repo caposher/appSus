@@ -13,14 +13,7 @@ export default {
               </section>`,
   data() {
     return {
-      note: {
-        type: 'note-txt',
-        isPinned: false,
-        color: 'color1',
-        info: {
-          txt: '',
-        },
-      },
+      note: null,
       typeIdx: 0,
       inputTypes: [
         { font: 'fa-font', type: 'note-txt', requestTxt: 'text' },
@@ -29,24 +22,32 @@ export default {
       ],
     };
   },
+  created() {
+    this.setEmptyNote();
+  },
   methods: {
     changeType(item, idx) {
-      console.log('item.type', item.type);
       this.note.type = item.type;
       this.typeIdx = idx;
     },
     newNote() {
       if (this.note.info.txt) {
+        if (this.note.type === 'note-video') {
+          this.info.videoId = this.note.info.txt.split('?v=')[1];
+        }
         this.$emit('new-note', this.note);
-        this.note = {
-          type: 'note-txt',
-          isPinned: false,
-          color: 'color1',
-          info: {
-            txt: '',
-          },
-        };
+        this.setEmptyNote();
       }
+    },
+    setEmptyNote() {
+      this.note = {
+        type: 'note-txt',
+        isPinned: false,
+        color: 'color1',
+        info: {
+          txt: '',
+        },
+      };
     },
   },
   computed: {

@@ -8,7 +8,7 @@ const gList = [
     type: 'note-video',
     isPinned: false,
     color: 'color1',
-    info: { txt: 'https://www.youtube.com/watch?v=kk0WRHV_vt8' },
+    info: { txt: 'https://www.youtube.com/watch?v=kk0WRHV_vt8', videoId: 'kk0WRHV_vt8' },
     id: 'Yok4i',
   },
 
@@ -67,7 +67,7 @@ const gList = [
     type: 'note-video',
     isPinned: false,
     color: 'color1',
-    info: { txt: 'https://www.youtube.com/watch?v=fuhHU_BZXSk' },
+    info: { txt: 'https://www.youtube.com/watch?v=fuhHU_BZXSk', videoId: 'fuhHU_BZXSk' },
     id: 'HXrmj',
   },
 ];

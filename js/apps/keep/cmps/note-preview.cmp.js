@@ -8,7 +8,7 @@ export default {
   template: ` <section :class="[noteSize, noteColor]" class="note-preview flex flex-column content-center space-between">
                 <text-type v-if="note.type === 'note-txt'" :txt="note.info.txt"/>
                 <img-type v-else-if="note.type === 'note-img'" :url="note.info.txt"/>
-                <video-type v-else-if="note.type === 'note-video'" :url="note.info.txt"/>
+                <video-type v-else-if="note.type === 'note-video'" :id="note.info.videoId"/>
                 <div :class="noteToolsColor" class="note-tools">
                   <span @click="$emit('removed',note.id)"> <i class="far fa-trash-alt"></i> </span>
                   <span @click="$emit('showModel',note)"> <i class="far fa-edit"></i></span>
@@ -34,7 +34,6 @@ export default {
   computed: {
     noteSize() {
       let noteSize;
-      // debugger;
       switch (this.note.type) {
         case 'note-txt':
           const txtLen = this.note.info.txt.length;
