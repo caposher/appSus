@@ -7,7 +7,7 @@ const gList = [
     id: 'n101',
     type: 'note-txt',
     isPinned: true,
-    color: 1,
+    color: 'color1',
     info: {
       txt: 'Fullstack Me Baby!',
     },
@@ -16,7 +16,7 @@ const gList = [
     id: 'n102',
     type: 'note-txt',
     isPinned: true,
-    color: 2,
+    color: 'color2',
     info: {
       txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
     },
@@ -25,7 +25,7 @@ const gList = [
     id: 'n103',
     type: 'note-txt',
     isPinned: true,
-    color: 3,
+    color: 'color3',
     info: {
       txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
     },
@@ -34,7 +34,7 @@ const gList = [
     id: 'n104',
     type: 'note-txt',
     isPinned: true,
-    color: 4,
+    color: 'color4',
     info: {
       txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
     },
@@ -43,7 +43,7 @@ const gList = [
     id: 'n105',
     type: 'note-txt',
     isPinned: true,
-    color: 5,
+    color: 'color5',
     info: {
       txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
     },
@@ -52,7 +52,7 @@ const gList = [
     id: 'n106',
     type: 'note-txt',
     isPinned: true,
-    color: 6,
+    color: 'color6',
     info: {
       txt: 'Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!',
     },

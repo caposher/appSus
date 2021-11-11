@@ -15,7 +15,6 @@
   width: calc(100% - 500px);
   height: calc(100% - 300px);
   transform: translate(-50%, -50%);
-  background-color: cornflowerblue;
   z-index: 30;
   padding: 10px;
   border-radius: 10px;

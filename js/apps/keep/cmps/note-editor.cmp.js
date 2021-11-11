@@ -4,8 +4,8 @@ export default {
   template: `
     <section v-if="updatedNote" class="note-editor">
         <div @click="closeModel" class="shadow-bg"></div>
-        <div v-if="updatedNote.type === 'note-txt'" class="model flex flex-column justify-center">
-        <textarea type="text" v-model="updatedNote.info.txt" placeHolder="Enter text here"/>
+        <div v-if="updatedNote.type === 'note-txt'" :class="note.color" class="model flex flex-column justify-center">
+        <textarea type="text" :class="'tool-'+note.color" v-model="updatedNote.info.txt" placeHolder="Enter text here"/>
         <button @click="closeModel">close</button>
         </div>
     </section>

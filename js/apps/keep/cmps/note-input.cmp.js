@@ -16,9 +16,9 @@ export default {
   data() {
     return {
       note: {
-        type: 'text',
+        type: 'note-txt',
         isPinned: false,
-        color: 1,
+        color: 'color1',
         info: {
           txt: '',
         },

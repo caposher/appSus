@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     changeColor(color) {
-      this.note.color = color;
+      this.note.color = `color${color}`;
       this.$emit('updated', this.note);
     },
   },
@@ -38,11 +38,11 @@ export default {
     },
     noteColor() {
       this.showColors = false;
-      return `color${this.note.color}`;
+      return this.note.color;
     },
     noteToolsColor() {
       this.showColors = false;
-      return `color-tool${this.note.color}`;
+      return `tool-${this.note.color}`;
     },
   },
 };
