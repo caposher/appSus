@@ -1,12 +1,14 @@
 import textType from './text-type.cmp.js';
 import imgType from './img-type.cmp.js';
+import videoType from './video-type.cmp.js';
 
 export default {
   props: ['note'],
   name: 'note-preview',
   template: ` <section :class="[noteSize, noteColor]" class="note-preview flex flex-column content-center space-between">
                 <text-type v-if="note.type === 'note-txt'" :txt="note.info.txt"/>
-                <img-type v-if="note.type === 'note-img'" :url="note.info.txt"/>
+                <img-type v-else-if="note.type === 'note-img'" :url="note.info.txt"/>
+                <video-type v-else-if="note.type === 'note-video'" :url="note.info.txt"/>
                 <div :class="noteToolsColor" class="note-tools">
                   <span @click="$emit('removed',note.id)"> <i class="far fa-trash-alt"></i> </span>
                   <span @click="$emit('showModel',note)"> <i class="far fa-edit"></i></span>
@@ -58,5 +60,6 @@ export default {
   components: {
     textType,
     imgType,
+    videoType,
   },
 };
