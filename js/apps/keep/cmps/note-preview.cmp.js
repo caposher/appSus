@@ -34,19 +34,22 @@ export default {
   computed: {
     noteSize() {
       let noteSize;
+      // debugger;
       switch (this.note.type) {
         case 'note-txt':
           const txtLen = this.note.info.txt.length;
-          if (txtLen < 100) noteSize = 'small-note';
-          else if (txtLen < 500) noteSize = 'medium-note';
-          else noteSize = 'large-note';
-          return noteSize;
+          if (txtLen < 100) noteSize = 'smallest-note ';
+          else if (txtLen < 200) noteSize = 'small-note';
+          else if (txtLen < 400) noteSize = 'medium-note';
+          else if (txtLen < 800) noteSize = 'large-note';
+          else noteSize = 'xl-note';
           break;
 
         case 'note-img':
         case 'note-video':
-          noteSize = 'large-note';
+          noteSize = 'medium-note';
       }
+      return noteSize;
     },
     noteColor() {
       this.showColors = false;

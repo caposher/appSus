@@ -9,7 +9,7 @@ export default {
     <section v-if="notes" class="keep-app main-content flex flex-column item-center ">
       <note-editor v-if="noteInModel" :note="noteInModel" @updated="editNote"/>
         <noteInput @new-note="setNewNote"/>
-        <div class="nots-container main-width">
+        <div class="notes-container main-width">
           <notePreview @removed="removedNote" @updated="editNote" @showModel="showModel" v-for="note in notes" :key="note.id" :note="note"/>
         </div>
     </section>

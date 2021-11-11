@@ -11,6 +11,7 @@ const gList = [
     info: { txt: 'https://www.youtube.com/watch?v=kk0WRHV_vt8' },
     id: 'Yok4i',
   },
+
   {
     id: 'n104',
     type: 'note-txt',
@@ -71,7 +72,7 @@ const gList = [
   },
 ];
 
-// localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
+localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
 
 function getNotes() {
   return storageService.query(NOTES_KEY);

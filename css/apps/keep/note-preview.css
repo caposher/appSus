@@ -29,18 +29,6 @@
   cursor: pointer;
 }
 
-.small-note {
-  grid-row: span 1;
-}
-
-.medium-note {
-  grid-row: span 2;
-}
-
-.large-note {
-  grid-row: span 3;
-}
-
 .pallete {
   position: absolute;
   left: 80px;
