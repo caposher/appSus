@@ -32,7 +32,7 @@ export default {
       let noteSize;
       const txtLen = this.note.info.txt.length;
       if (txtLen < 100) noteSize = 'small-note';
-      else if (txtLen < 300) noteSize = 'medium-note';
+      else if (txtLen < 500) noteSize = 'medium-note';
       else noteSize = 'large-note';
       return noteSize;
     },

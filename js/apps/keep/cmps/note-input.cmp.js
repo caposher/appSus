@@ -31,9 +31,9 @@ export default {
       if (this.note.info.txt) {
         this.$emit('new-note', this.note);
         this.note = {
-          type: 'text',
+          type: 'note-txt',
           isPinned: false,
-          color: 1,
+          color: 'color1',
           info: {
             txt: '',
           },
