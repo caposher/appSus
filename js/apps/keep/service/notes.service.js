@@ -5,12 +5,19 @@ const NOTES_KEY = 'notes';
 const gList = [
   { id: 'n101', type: 'note-txt', isPinned: true, color: 'color1', info: { txt: 'osher cappelli' } },
   {
+    type: 'note-video',
+    isPinned: false,
+    color: 'color1',
+    info: { txt: 'https://www.youtube.com/watch?v=kk0WRHV_vt8' },
+    id: 'Yok4i',
+  },
+  {
     id: 'n104',
     type: 'note-txt',
     isPinned: true,
     color: 'color4',
     info: {
-      txt: 'The Plage de Coco, or Coco Beach, is one of the less well-known and less frequented beaches in Nice. So, if you are also looking for some relaxation during your stay, this is the place to be. Unlike the other beaches, Coco Beach is not just a pebble beach, but also a rocky beach. It is quite unspoilt and at some points you can only get into the water via a ladder. The way there is also a bit steeper, but the little effort definitely pays off in the end!',
+      txt: 'The Plage de Coco, or Coco Beach, is one of the less well-known and less frequented beaches in Nice. \nSo, if you are also looking for some relaxation during your stay, this is the place to be. \nUnlike the other beaches, Coco Beach is not just a pebble beach, but also a rocky beach. \nIt is quite unspoilt and at some points you can only get into the water via a ladder. \nThe way there is also a bit steeper, but the little effort definitely pays off in the end!',
     },
   },
   {
@@ -39,15 +46,6 @@ const gList = [
     id: 'HxGKk',
   },
   {
-    type: 'note-txt',
-    isPinned: false,
-    color: 'color2',
-    info: {
-      txt: 'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla',
-    },
-    id: 'IxEZT',
-  },
-  {
     type: 'note-img',
     isPinned: false,
     color: 'color3',
@@ -64,6 +62,13 @@ const gList = [
     id: 't0V16',
   },
   { type: 'note-txt', isPinned: false, color: 'color4', info: { txt: 'my birthday: 17.07.1988' }, id: 'wfEQ0' },
+  {
+    type: 'note-video',
+    isPinned: false,
+    color: 'color1',
+    info: { txt: 'https://www.youtube.com/watch?v=fuhHU_BZXSk' },
+    id: 'HXrmj',
+  },
 ];
 
 // localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
