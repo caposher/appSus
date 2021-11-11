@@ -1,10 +1,12 @@
+import textType from './text-type.cmp.js';
+import imgType from './img-type.cmp.js';
+
 export default {
   props: ['note'],
   name: 'note-preview',
   template: ` <section :class="[noteSize, noteColor]" class="note-preview flex flex-column content-center space-between">
-                <div  class="notes-container">
-                  <p>{{note.info.txt}}</p>
-                </div>
+                <text-type v-if="note.type === 'note-txt'" :txt="note.info.txt"/>
+                <img-type v-if="note.type === 'note-img'" :url="note.info.txt"/>
                 <div :class="noteToolsColor" class="note-tools">
                   <span @click="$emit('removed',note.id)"> <i class="far fa-trash-alt"></i> </span>
                   <span @click="$emit('showModel',note)"> <i class="far fa-edit"></i></span>
@@ -30,11 +32,19 @@ export default {
   computed: {
     noteSize() {
       let noteSize;
-      const txtLen = this.note.info.txt.length;
-      if (txtLen < 100) noteSize = 'small-note';
-      else if (txtLen < 500) noteSize = 'medium-note';
-      else noteSize = 'large-note';
-      return noteSize;
+      switch (this.note.type) {
+        case 'note-txt':
+          const txtLen = this.note.info.txt.length;
+          if (txtLen < 100) noteSize = 'small-note';
+          else if (txtLen < 500) noteSize = 'medium-note';
+          else noteSize = 'large-note';
+          return noteSize;
+          break;
+
+        case 'note-img':
+        case 'note-video':
+          noteSize = 'large-note';
+      }
     },
     noteColor() {
       this.showColors = false;
@@ -44,5 +54,9 @@ export default {
       this.showColors = false;
       return `tool-${this.note.color}`;
     },
+  },
+  components: {
+    textType,
+    imgType,
   },
 };
