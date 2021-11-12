@@ -10,25 +10,37 @@ export default {
                 <img-type v-else-if="note.type === 'note-img'" :url="note.info.txt"/>
                 <video-type v-else-if="note.type === 'note-video'" :id="note.info.videoId"/>
                 <div :class="noteToolsColor" class="note-tools">
+                  <span @click="changeImpotent"> <i :class="['fas fa-exclamation', setImportent]"></i></span>
                   <span @click="$emit('removed',note.id)"> <i class="far fa-trash-alt"></i> </span>
                   <span @click="$emit('showModel',note)"> <i class="far fa-edit"></i></span>
                   <span @click="showColors=true"> <i class="fas fa-palette"></i></span>
                   <div v-show='showColors' :class="noteToolsColor" class="pallete">
-                      <div @click="changeColor(num)" class="pallete-color color" :class="'color'+ num" v-for="(num in colors" :key="num"  ></div>
+                      <div @click="changeColor(num)" class="pallete-color color" :class="'color'+ num" v-for="num in colorNums" :key="num"  ></div>
                   </div>
                 </div>
 
               </section>`,
   data() {
     return {
-      colors: 6,
+      colorNums: 6,
       showColors: false,
+      importent: null,
     };
+  },
+  created() {
+    this.importent = this.note.isPinned;
   },
   methods: {
     changeColor(color) {
-      this.note.color = `color${color}`;
-      this.$emit('updated', this.note);
+      let updatedNote = { ...this.note };
+      updatedNote.color = `color${color}`;
+      this.$emit('updated', updatedNote);
+    },
+    changeImpotent() {
+      this.importent = !this.importent;
+      let updatedNote = { ...this.note };
+      updatedNote.isPinned = this.importent;
+      this.$emit('updated', updatedNote);
     },
   },
   computed: {
@@ -58,6 +70,10 @@ export default {
     noteToolsColor() {
       this.showColors = false;
       return `tool-${this.note.color}`;
+    },
+    setImportent() {
+      console.log('enter');
+      return this.importent ? 'importent' : '';
     },
   },
   components: {

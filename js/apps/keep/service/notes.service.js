@@ -72,7 +72,16 @@ const gList = [
   },
 ];
 
-localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
+_init();
+
+function _init() {
+  let data = getNotes().then((notes) => {
+    if (!notes.length) {
+      data = gList;
+      localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
+    }
+  });
+}
 
 function getNotes() {
   return storageService.query(NOTES_KEY);

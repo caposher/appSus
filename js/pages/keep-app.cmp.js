@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     setNotes(notes) {
+      notes.sort((note) => (note.isPinned ? -1 : 1));
       this.notes = notes;
     },
     removedNote(id) {
@@ -37,12 +38,12 @@ export default {
       notesService.updateNote(note).then(this.setNotes);
       this.noteInModel = null;
     },
+
     showModel(note) {
       this.noteInModel = note;
       console.log('this.noteInModel ', this.noteInModel);
     },
   },
-
   components: {
     notePreview,
     noteInput,
