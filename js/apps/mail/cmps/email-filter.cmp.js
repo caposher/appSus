@@ -2,7 +2,7 @@ export default {
     name: 'email-filter',
     template: `
         <div class="email-filter">
-            <!-- <i class="fas fa-search"></i>> -->
+            <!-- <i class="fas fa-search"></i> -->
             <input class="input-search" @input="filter" v-model="filterBy.text" type="text" placeholder="Search..." />
             <select class="filter-select" v-model="filterBy.emailStatus" @change="filter" >
                    <option value="" selected>All</option>

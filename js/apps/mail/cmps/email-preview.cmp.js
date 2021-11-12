@@ -5,7 +5,7 @@ export default {
     name: 'email-preview',
     props: ['email'],
     template: `
-    <!-- <section class="email-row-container"> -->
+    <!-- <section> -->
     <li class="email-preview-container" :class="classIsRead">
             <button @click.stop="toggleStar">
                     <span class="stars" :class="classStar"></span>
@@ -20,6 +20,19 @@ export default {
                 <button @click= "deleteEmail(email.id)"> <i class="fas fa-trash"></i> </button>
             </div>
     </li>
+    <!-- <li v-if= "showEmail" class="email-show" >
+        <div class="peek-header flex space-between">
+             <h3 class="peek-subject"> {{ email.subject }} </h3>
+             <div class=peek-controls>
+                <router-link :to="'email/' + email.id"> <i class="fas fa-expand"></i> </router-link>
+                <button @click.stop="replyToEmail" title="Replay"> <i class="fas fa-reply"></i> </button>
+                <button @click.stop="saveAsNote" title = "Save as a Note" > <i class="fas fa-paper-plane"></i> </button >
+                <button @click.stop="deleteEmail(email.id)" title = "Delete" > <i class="fas fa-trash"></i> </button >
+            </div >
+         </div >
+         <p class="peek-from"> {{ email.from }} <span> <{{ email.fromEmail }}> </span> </p>
+         <p class="peek-body"> {{ email.body }} </p>
+     </li> -->
   
 <!-- </section> -->
     `,
@@ -30,13 +43,13 @@ export default {
             var day = dateObj.getUTCDate();
             var year = dateObj.getUTCFullYear();
             var newdate = day + "/" + month + "/" + year;
-            return newdate;
-            // return new Date().toString().slice(4, 7); //month
+            // return newdate;
+            return new Date().toString().slice(4, 7) + ' ' + day; //month
             // var date = new Date(this.email.sentAt);
             // return (this.email.sentAt) ? date.toLocaleString() : '';
         },
         formattedBodyText() {
-            return this.email.body.slice(0, 30);
+            return this.email.body.slice(0, 40);
         },
         formattedSubjectText() {
             return this.email.body.slice(0, 10);
