@@ -12,7 +12,9 @@ export const emailService = {
     query,
     getById,
     removeEmail,
-    updateEmail
+    updateEmail,
+    sendEmail,
+    getEmptyEmail
 
 }
 function updateEmail(email) {
@@ -21,7 +23,18 @@ function updateEmail(email) {
 
 
 function removeEmail(emailId) {
-    return storageService.remove(EMAILS_KEY, emailId)
+    return getById(emailId)
+        .then(email => {
+            if (email.isDeleted) {
+                console.log('deleted', email)
+                return storageService.remove(EMAILS_KEY, emailId);
+            }
+            else {
+                email.isDeleted = true;
+                console.log('trashed', email)
+                return storageService.put(EMAILS_KEY, email)
+            }
+        })
 }
 
 
@@ -34,6 +47,35 @@ function query() {
 
 function getById(emailId) {
     return storageService.get(EMAILS_KEY, emailId);
+}
+
+function sendEmail(email) {
+    // email.id = utilService.makeId(4);
+    email.from = loggedUser.fullName;
+    email.fromEmail = loggedUser.email;
+    email.isRead = false;
+    email.isSent = true;
+    email.isStarred = false;
+    email.isDeleted = false;
+    email.sentAt = Date.now();
+    return storageService.post(EMAILS_KEY, email);
+}
+
+function getEmptyEmail() {
+    return {
+        subject: '',
+        body: '',
+        // isRead: false,
+        sentAt: Date.now(),
+        from: '',
+        fromEmail: '',
+        to: '',
+        isRead: false,
+        isStarred: false,
+        isDeleted: false,
+        isSent: false,
+        folder: 'inbox',
+    }
 }
 
 function _createEmails() {
