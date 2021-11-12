@@ -1,6 +1,6 @@
 export default {
-    name: 'email-filter',
-    template: `
+  name: 'email-filter',
+  template: `
         <div class="email-filter">
             <!-- <i class="fas fa-search"></i>> -->
             <input class="input-search" @input="filter" v-model="filterBy.text" type="text" placeholder="Search..." />
@@ -11,18 +11,18 @@ export default {
              </select>
         </div>
     `,
-    data() {
-        return {
-            filterBy: {
-                text: '',
-                emailStatus: ''
-            }
-        };
+  data() {
+    return {
+      filterBy: {
+        text: '',
+        emailStatus: '',
+      },
+    };
+  },
+  methods: {
+    filter() {
+      // console.log(this.filterBy.emailStatus);
+      this.$emit('filtered', { ...this.filterBy });
     },
-    methods: {
-        filter() {
-            // console.log(this.filterBy.emailStatus);
-            this.$emit('filtered', { ...this.filterBy });
-        }
-    }
-}
+  },
+};

@@ -20,6 +20,10 @@
   padding-inline-end: 48px;
 }
 
+.note-tools .last-one {
+  padding-inline-start: 30px;
+}
+
 .note-tools span {
   padding-inline-end: 5px;
 }
