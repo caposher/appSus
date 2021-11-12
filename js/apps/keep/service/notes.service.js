@@ -1,5 +1,5 @@
 import { storageService } from '../../../services/async-storage-service.js';
-export const notesService = { getNotes, addNote, removeNote, updateNote };
+export const notesService = { getNotes, addNote, removeNote, updateNote, getEmptyNote };
 
 const NOTES_KEY = 'notes';
 const gList = [
@@ -8,7 +8,7 @@ const gList = [
     type: 'note-video',
     isPinned: false,
     color: 'color1',
-    info: { txt: 'https://www.youtube.com/watch?v=kk0WRHV_vt8' },
+    info: { txt: 'https://www.youtube.com/watch?v=kk0WRHV_vt8', videoId: 'kk0WRHV_vt8' },
     id: 'Yok4i',
   },
 
@@ -26,7 +26,7 @@ const gList = [
     type: 'note-txt',
     isPinned: true,
     color: 'color5',
-    info: { txt: 'object is a function that return data... right? 🤔 wait... fuck euv!' },
+    info: { txt: 'object is a function that return data... right? 🤔 wait... ' },
   },
   {
     id: 'n106',
@@ -67,12 +67,21 @@ const gList = [
     type: 'note-video',
     isPinned: false,
     color: 'color1',
-    info: { txt: 'https://www.youtube.com/watch?v=fuhHU_BZXSk' },
+    info: { txt: 'https://www.youtube.com/watch?v=fuhHU_BZXSk', videoId: 'fuhHU_BZXSk' },
     id: 'HXrmj',
   },
 ];
 
-localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
+_init();
+
+function _init() {
+  let data = getNotes().then((notes) => {
+    if (!notes.length) {
+      data = gList;
+      localStorage.setItem(NOTES_KEY, JSON.stringify(gList));
+    }
+  });
+}
 
 function getNotes() {
   return storageService.query(NOTES_KEY);
@@ -88,4 +97,15 @@ function removeNote(noteId) {
 
 function updateNote(note) {
   return storageService.put(NOTES_KEY, note).then(() => getNotes());
+}
+
+function getEmptyNote() {
+  return {
+    type: 'note-txt',
+    isPinned: false,
+    color: 'color1',
+    info: {
+      txt: '',
+    },
+  };
 }

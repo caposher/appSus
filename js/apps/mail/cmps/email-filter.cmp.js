@@ -1,8 +1,8 @@
 // import emailFolderList from '../cmps/email-folder-list.cmp.js';
 
 export default {
-    name: 'email-filter',
-    template: `
+  name: 'email-filter',
+  template: `
         <div class="email-filter">
 
             <!-- <email-folder-list class="email-folders email-folders-mobile" v-if="openNav"/> -->
@@ -17,28 +17,28 @@ export default {
              </select>
         </div>
     `,
-    data() {
-        return {
-            filterBy: {
-                text: '',
-                emailStatus: ''
-            },
-            openNav: false,
-        };
+  data() {
+    return {
+      filterBy: {
+        text: '',
+        emailStatus: '',
+      },
+      openNav: false,
+    };
+  },
+  methods: {
+    filter() {
+      // console.log(this.filterBy.emailStatus);
+      this.$emit('filtered', { ...this.filterBy });
     },
-    methods: {
-        filter() {
-            // console.log(this.filterBy.emailStatus);
-            this.$emit('filtered', { ...this.filterBy });
-        },
-        // toggleMenu() {
-        //     this.openNav = !this.openNav
-        // },
-        // sort(){
-        //     this.$emit('sorted', this.sortBy);
-        // }
-    },
-    components: {
-        // emailFolderList
-    }
-}
+    // toggleMenu() {
+    //     this.openNav = !this.openNav
+    // },
+    // sort(){
+    //     this.$emit('sorted', this.sortBy);
+    // }
+  },
+  components: {
+    // emailFolderList
+  },
+};

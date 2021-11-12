@@ -1,26 +1,21 @@
 export default {
   name: 'note-input',
-  template: ` <section class="note-input flex justify-center ">
-                <div class="input-container main-width flex ">
+  template: ` <section class="note-input flex justify-center item-center">
+                <div class="input-container main-width flex space-between">
+                <section class="input flex item-center">
                   <textarea type="text"  v-model="note.info.txt" :placeHolder="[[setUserTxt]]"/>  
-                <span @click="newNote"><i class="fas fa-chevron-circle-right"></i></span>
-                  <ul class="flex">
+                  <span @click="newNote"><i class="fas fa-chevron-circle-right"></i></span>
+                </section> 
+                <ul class="flex">
                     <li  v-for="(item,idx) in inputTypes" :key="idx">
-                      <span><i @click="changeType(item,idx)" :class="'fas ' + item.font "></i></span>
+                      <span><i @click="changeType(item,idx)" :class="['fas ' + item.font, typeIdx === idx ? 'mark' : '']"></i></span>
                     </li>
                   </ul>
                 </div>
               </section>`,
   data() {
     return {
-      note: {
-        type: 'note-txt',
-        isPinned: false,
-        color: 'color1',
-        info: {
-          txt: '',
-        },
-      },
+      note: null,
       typeIdx: 0,
       inputTypes: [
         { font: 'fa-font', type: 'note-txt', requestTxt: 'text' },
@@ -29,24 +24,32 @@ export default {
       ],
     };
   },
+  created() {
+    this.setEmptyNote();
+  },
   methods: {
     changeType(item, idx) {
-      console.log('item.type', item.type);
       this.note.type = item.type;
       this.typeIdx = idx;
     },
     newNote() {
       if (this.note.info.txt) {
+        if (this.note.type === 'note-video') {
+          this.info.videoId = this.note.info.txt.split('?v=')[1];
+        }
         this.$emit('new-note', this.note);
-        this.note = {
-          type: 'note-txt',
-          isPinned: false,
-          color: 'color1',
-          info: {
-            txt: '',
-          },
-        };
+        this.setEmptyNote();
       }
+    },
+    setEmptyNote() {
+      this.note = {
+        type: 'note-txt',
+        isPinned: false,
+        color: 'color1',
+        info: {
+          txt: '',
+        },
+      };
     },
   },
   computed: {

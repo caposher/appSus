@@ -14,6 +14,19 @@
   position: relative;
   padding: 5px;
   border-radius: 3px;
+  font-size: 16px;
+}
+
+.note-tools span:first-child {
+  padding-inline-end: 48px;
+}
+
+.note-tools .last-one {
+  padding-inline-start: 30px;
+}
+
+.note-tools span {
+  padding-inline-end: 5px;
 }
 
 .note-tools i {
@@ -24,7 +37,6 @@
   text-align: center;
 }
 .note-tools i:hover {
-  /* background-color: hsl(33, 50%, 88%); */
   box-shadow: 0px 0px 3px black;
   cursor: pointer;
 }
@@ -52,6 +64,11 @@
 }
 .color:hover {
   cursor: pointer;
+}
+
+.importent {
+  color: rgb(255, 136, 0);
+  /* background-color: rgb(255, 169, 8); */
 }
 
 .color1 {

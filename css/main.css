@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+html {
+  font-family: lato-regular;
+  font-size: 13px;
+}
+
 body {
   margin: 0;
 }
@@ -24,12 +29,12 @@ a {
   color: black;
   text-decoration: none;
   box-shadow: 0px 3px 0 black;
+  font-weight: bold;
 }
 
 a:hover {
   color: hsl(200, 53%, 80%);
-  font-weight: bold;
-  box-shadow: 0px 3px 0 hsl(200, 53%, 80%);
+  box-shadow: 0px 3px 0 hsl(202, 53%, 60%);
 }
 
 ul {
@@ -41,6 +46,7 @@ ul {
 textarea {
   resize: none;
   padding: 15px;
+  font-family: lato-regular;
 }
 
 button {
@@ -49,15 +55,46 @@ button {
   cursor: pointer;
 }
 
+@font-face {
+  font-family: lato-regular;
+  src: url('../fonts/Lato-Regular.ttf');
+}
+
+@font-face {
+  font-family: lato-bolt;
+  src: url('../fonts/Lato-Bolt.ttf');
+}
+
 .main-content {
   min-height: 80vh;
+  background-color: hsl(211, 100%, 96%);
 }
 
 .user-msg {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  padding: 10px;
+  z-index: 100;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+
+  min-width: 300px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 1px 1px 6px black;
+  color: white;
+  font-weight: 600;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 3s;
+}
+
+.success {
+  background-color: hsl(120, 40%, 46%);
+}
+
+.error {
+  background-color: hsl(0, 40%, 50%);
 }
 
 @media (min-width: 500px) {
