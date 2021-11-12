@@ -1,12 +1,14 @@
 export default {
   name: 'note-input',
-  template: ` <section class="note-input flex justify-center ">
-                <div class="input-container main-width flex ">
+  template: ` <section class="note-input flex justify-center item-center">
+                <div class="input-container main-width flex space-between">
+                <section class="input flex item-center">
                   <textarea type="text"  v-model="note.info.txt" :placeHolder="[[setUserTxt]]"/>  
-                <span @click="newNote"><i class="fas fa-chevron-circle-right"></i></span>
-                  <ul class="flex">
+                  <span @click="newNote"><i class="fas fa-chevron-circle-right"></i></span>
+                </section> 
+                <ul class="flex">
                     <li  v-for="(item,idx) in inputTypes" :key="idx">
-                      <span><i @click="changeType(item,idx)" :class="'fas ' + item.font "></i></span>
+                      <span><i @click="changeType(item,idx)" :class="['fas ' + item.font, typeIdx === idx ? 'mark' : '']"></i></span>
                     </li>
                   </ul>
                 </div>

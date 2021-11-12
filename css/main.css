@@ -51,6 +51,7 @@ button {
 
 .main-content {
   min-height: 80vh;
+  background-color: hsl(211, 100%, 96%);
 }
 
 .user-msg {

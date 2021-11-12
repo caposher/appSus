@@ -1,39 +1,42 @@
 .note-input {
   padding: 20px 0;
   width: 100%;
+  flex-direction: column;
 }
 
 .input-container {
-  height: 60px;
+  min-height: 60px;
   align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0px black;
+  flex-direction: column;
 }
-/* 
-.input-container span {
-  margin-inline-end: 10px;
-} */
+
+.input-container ul {
+  padding: 10px;
+}
+
+.input {
+  width: 300px;
+  padding: 10px;
+  flex-direction: column;
+}
+
+.input span {
+  margin: 5px;
+}
 
 .note-input textarea {
   padding-inline-end: 10px;
-
-  height: 25px;
+  width: 100%;
+  height: 60px;
   border-radius: 5px;
   border: none;
   box-shadow: 0px 0px 3px black;
 }
 
-@media (min-width: 500px) {
-  .note-input textarea {
-    width: 600px;
-    height: 45px;
-  }
-}
-
-.note-input span {
-  padding-inline-start: 10px;
-}
-
 .note-input i {
-  width: 25px;
+  width: 30px;
   padding: 5px 0;
   text-align: center;
   font-size: 20px;
@@ -41,6 +44,25 @@
 
 .note-input i:hover {
   cursor: pointer;
-  background-color: hsl(215, 52%, 76%);
+  background-color: hsl(235, 33%, 66%);
   border-radius: 5px;
+}
+
+.mark {
+  background-color: hsl(265, 52%, 86%);
+  border-radius: 5px;
+}
+
+@media (min-width: 800px) {
+  .input-container {
+    width: 620px;
+    flex-direction: row;
+  }
+  .input {
+    width: 100%;
+    flex-direction: row;
+  }
+  .note-input textarea {
+    height: 45px;
+  }
 }

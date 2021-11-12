@@ -10,7 +10,7 @@ export default {
           <textarea type="text" :class="'tool-'+note.color" v-model="updatedNote.info.txt" placeHolder="Enter text here"/>
             <button @click="closeModel">close</button>
         </div>
-        </div> -->
+        </div> 
     </section>
     `,
   data() {
