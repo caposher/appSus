@@ -4,6 +4,7 @@ import emailFolderList from '../cmps/email-folder-list.cmp.js';
 import emailFilter from '../cmps/email-filter.cmp.js';
 import { eventBus } from "../../../services/event-bus-service.js";
 import emailCompose from "../cmps/email-compose.cmp.js";
+import { notesService } from "../../keep/service/notes.service.js"
 
 
 export default {
@@ -17,7 +18,7 @@ export default {
             <div class="email-content">
                 <!-- <button class="menu-btn" v-on:click="toggleMenu">☰</button> -->
                 <email-filter @filtered="setFilter"/>
-                <email-list @removeEmail="removeEmailFromList" :emails="emailsToShow" />
+                <email-list @removeEmail="removeEmailFromList" @sendEmailAsNote="sendAsNote" :emails="emailsToShow" />
                 <email-compose v-if="composeEmail" :composeEmail = "composeEmail" @close="closeComposeEmail" @send="sendEmail" @deleteCompose="composeEmail=false"/>
             </div>
         </section>
@@ -83,7 +84,18 @@ export default {
             this.emailToCompose = null;
             this.composeEmail = false;
         },
+        sendAsNote(email) {
+            var note = notesService.getEmptyNote();
+            note.isPinned = true;
+            note.info.txt = `Email from ${email.from} + Subject - ${email.subject}` + '\n' +
+                `Message: "${email.body}"`;
+            notesService.addNote(note);
+            this.$router.push('/keep');
+
+
+        },
         sendEmail(email) {
+            email.isSent = true;
             emailService.sendEmail(email)
                 .then(() => {
                     // console.log(email);
@@ -148,7 +160,6 @@ export default {
             else if (this.folder === 'trash') {
                 emailsToShow = this.emails.filter(email => email.isDeleted);
                 console.log('emailsIsTrashed', emailsToShow);
-
             }
             // emailsToShow = emailsToShow.filter(email =>
             //     (email.body.toLowerCase().includes(searchStr)) || (email.subject.toLowerCase().includes(searchStr)));

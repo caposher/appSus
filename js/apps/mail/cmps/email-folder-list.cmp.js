@@ -42,6 +42,8 @@ export default {
         },
         composeEmail() {
             this.$emit('compose');
+            this.$router.push('compose');//
+
             // if (this.isDraftOpen) return
             // eventBus.$emit('openCompose')
             // eventBus.$emit('composeEmail')

@@ -1,4 +1,4 @@
-import { emailService } from "../service/email-service.js";
+// import { emailService } from "../service/email-service.js";
 // import { eventBus } from "../../../services/event-bus-service";
 
 export default {
@@ -25,8 +25,8 @@ export default {
              <h3 class="small-preview-subject"> {{ email.subject }} </h3>
              <div class=small-preview-buttons>
                 <router-link :to="'email/' + email.id"> <i class="fas fa-expand"></i> </router-link>
-                <button @click.stop="replyToEmail" > <i class="fas fa-reply"></i> </button>
-                <button @click.stop="saveAsNote"> <i class="fas fa-paper-plane"></i> </button >
+                <button @click.stop="replyToEmail(email.id)" > <i class="fas fa-reply"></i> </button>
+                <button @click.stop="saveAsNote(email)"> <i class="fas fa-paper-plane"></i> </button >
                 <!-- <button @click.stop="deleteEmail(email.id)" title = "Delete" > <i class="fas fa-trash"></i> </button > -->
             </div >
          </div >
@@ -58,7 +58,7 @@ export default {
             return this.email.body.slice(0, 40);
         },
         formattedSubjectText() {
-            return this.email.body.slice(0, 20);
+            return this.email.subject.slice(0, 20);
         },
         classStyleRead() {
             if (this.email.isRead) return 'fas fa-envelope-open'
@@ -97,13 +97,19 @@ export default {
             this.showEmail = !this.showEmail;
             if (!this.email.isRead) this.email.isRead = true;
             console.log(this.showEmail);
-        }
+        },
+        saveAsNote(email) {
+            this.$emit('saveAsNote', email);
+        },
+        // replyToEmail() {
+        // const email = this.email;
+        // this.$router.push(`email:/${email.id}?from=${email.fromEmail}&subject=Re:${email.subject}&body=${email.body}`);
+        // }
     },
+
 
     components: {
 
 
     }
-
-
 }

@@ -1,5 +1,4 @@
 // import { emailService } from "../services/email.service.js";
-// import { eventBus, EVENT_SHOW_MSG } from '../../../services/event-bus.service.js';
 
 export default {
     props: ['composeEmail'],
@@ -45,7 +44,7 @@ export default {
     },
 
     monuted() {
-        // this.$refs.to.focus();
+        this.$refs.to.focus();
 
     },
     methods: {
@@ -54,12 +53,16 @@ export default {
             // this.$router.push('/email');
             // composeEmail = false;
             this.$emit('close');
+            this.$router.push('/email')
         },
         sendEmail() {
             this.$emit('send', this.email);
+            this.$router.push('/email')
         },
         deleteAndClose() {
             this.$emit('deleteCompose');
+            this.$router.push('/email')
+
         },
     },
 
@@ -73,39 +76,3 @@ export default {
 
 
 
-
-    //     sendEmail() {
-    //         if (!this.email.name.includes('@')) this.email.name += '@gmail.com';
-    //         emailService.sendEmail(this.email)
-    //             .then(() => {
-    //                 eventBus.$emit(EVENT_SHOW_MSG, { txt: 'Email was sent', type: 'success' });
-    //             });
-    //         this.$router.push('/email/');
-    //     },
-    //     deleteDraft() {
-    //         emailService.deleteEmail(this.email.id)
-    //             .then(() => {
-    //                 eventBus.$emit(EVENT_SHOW_MSG, { txt: 'Draft was discarded', type: 'success' });
-    //             });
-    //         this.$router.push('/email/');
-    //     },
-    //     saveDraft() {
-    //         if (this.email.name || this.email.subject || this.email.body) {
-    //             emailService.saveEmailDraft(this.email)
-    //                 .then(() => {
-    //                     this.isSaveDraft = true;
-    //                     setTimeout(() => {
-    //                         this.isSaveDraft = false;
-    //                     }, 2000);
-    //                 });
-    //         }
-    //     },
-
-    //     exitCompose() {
-    //         this.saveDraft();
-    //         this.$router.push('/email');
-    //     },
-    //     debounce(func, time) {
-    //         if (this.timeout) clearTimeout(this.timeout);
-    //         this.timeout = setTimeout(func, time);
-    //     }
