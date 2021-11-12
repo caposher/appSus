@@ -26,7 +26,7 @@ const gList = [
     type: 'note-txt',
     isPinned: true,
     color: 'color5',
-    info: { txt: 'object is a function that return data... right? 🤔 wait... fuck euv!' },
+    info: { txt: 'object is a function that return data... right? 🤔 wait... ' },
   },
   {
     id: 'n106',
