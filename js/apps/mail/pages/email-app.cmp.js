@@ -87,8 +87,11 @@ export default {
             emailService.sendEmail(email)
                 .then(() => {
                     // console.log(email);
-                    this.emails = this.emails.filter(email => email.isSent)
+                    // this.emails = this.emails.filter(email => email.isSent)
                     this.composeEmail = false;
+                    this.folder = 'sent';
+                    this.emails = this.emails.filter(email => email.isSent)
+
                     const msg = {
                         txt: `Email was sent`,
                         type: 'success'
