@@ -8,15 +8,15 @@ const routes = [
     component: homePage,
   },
   {
-    path: '/books',
+    path: '/books/',
     component: homePage,
   },
   {
-    path: '/email',
+    path: '/email/',
     component: emailPage,
   },
   {
-    path: '/keep',
+    path: '/keep/',
     component: keepPage,
   },
 ];

@@ -4,4 +4,11 @@
   height: 10vh;
   padding: 10px;
   text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.app-footer span {
+  text-decoration: underline 2px #d5daeb;
+  /* color: #d5daeb; */
 }
