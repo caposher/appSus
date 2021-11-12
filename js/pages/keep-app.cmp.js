@@ -1,5 +1,6 @@
 import { eventBus } from '../services/event-bus-service.js';
 import { notesService } from '../apps/keep/service/notes.service.js';
+import { emailService } from '../apps/mail/service/email-service.js';
 import notePreview from '../apps/keep/cmps/note-preview.cmp.js';
 import noteInput from '../apps/keep/cmps/note-input.cmp.js';
 import noteEditor from '../apps/keep/cmps/note-editor.cmp.js';
@@ -13,7 +14,7 @@ export default {
         <noteInput @new-note="setNewNote"/>
         <div class="notes-container main-width">
           <notePreview @removed="removedNote" @updated="editNote" @showModel="showModel"
-          @clone="cloneNote" v-for="note in notes" :key="note.id" :note="note"/>
+          @clone="cloneNote" @email="sendMail" v-for="note in notes" :key="note.id" :note="note"/>
         </div>
     </section>
   `,
@@ -58,7 +59,15 @@ export default {
     },
     showModel(note) {
       this.noteInModel = note;
-      console.log('this.noteInModel ', this.noteInModel);
+    },
+    sendMail(note) {
+      let mail = emailService.getEmptyEmail();
+      mail.subject = `Hi! look at this! (this is not spam... really)`;
+      mail.body = note.info.txt;
+      mail.from = 'from me...';
+      mail.fromEmail = 'decem34846@elastit.com';
+      mail.to = 'Anna';
+      emailService.sendEmail(mail).then(this.$router.push('email/'));
     },
   },
   components: {

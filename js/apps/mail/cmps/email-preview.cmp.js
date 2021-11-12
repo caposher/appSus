@@ -1,10 +1,10 @@
-import { emailService } from "../service/email-service.js";
+import { emailService } from '../service/email-service.js';
 // import { eventBus } from "../../../services/event-bus-service";
 
 export default {
-    name: 'email-preview',
-    props: ['email'],
-    template: `
+  name: 'email-preview',
+  props: ['email'],
+  template: `
     <section>
     <li @click="openSmallPreview" class="email-preview-container" :class="classIsRead">
             <button @click.stop="toggleStar">
@@ -36,74 +36,64 @@ export default {
 </section>
     `,
 
-    data() {
-        return {
-            showEmail: false,
-        }
+  data() {
+    return {
+      showEmail: false,
+    };
+  },
+
+  computed: {
+    formattedDate() {
+      var dateObj = new Date();
+      var month = dateObj.getUTCMonth() + 1; //months from 1-12
+      var day = dateObj.getUTCDate();
+      var year = dateObj.getUTCFullYear();
+      var newdate = day + '/' + month + '/' + year;
+      // return newdate;
+      return new Date().toString().slice(4, 7) + ' ' + day; //month
+      // var date = new Date(this.email.sentAt);
+      // return (this.email.sentAt) ? date.toLocaleString() : '';
     },
-
-    computed: {
-        formattedDate() {
-            var dateObj = new Date();
-            var month = dateObj.getUTCMonth() + 1; //months from 1-12
-            var day = dateObj.getUTCDate();
-            var year = dateObj.getUTCFullYear();
-            var newdate = day + "/" + month + "/" + year;
-            // return newdate;
-            return new Date().toString().slice(4, 7) + ' ' + day; //month
-            // var date = new Date(this.email.sentAt);
-            // return (this.email.sentAt) ? date.toLocaleString() : '';
-        },
-        formattedBodyText() {
-            return this.email.body.slice(0, 40);
-        },
-        formattedSubjectText() {
-            return this.email.body.slice(0, 20);
-        },
-        classStyleRead() {
-            if (this.email.isRead) return 'fas fa-envelope-open'
-            else return 'fas fa-envelope'
-        },
-        classStar() {
-            if (this.email.isStarred) return 'fas fa-star checked'
-            else return 'far fa-star'
-        },
-        classIsRead() {
-            if (this.email.isRead) return 'read';
-            else return 'unread';
-        }
-
+    formattedBodyText() {
+      return this.email.body.slice(0, 40);
     },
-
-
-    methods: {
-        toggleRead() {
-            console.log('test');
-            this.email.isRead = !this.email.isRead
-            emailService.updateEmail(this.email)
-                .then(email => this.email = email);
-        },
-        toggleStar() {
-            console.log('test');
-            this.email.isStarred = !this.email.isStarred;
-            emailService.updateEmail(this.email)
-                .then(email => this.email = email);
-
-        },
-        deleteEmail(emailId) {
-            this.$emit('remove', emailId);
-        },
-        openSmallPreview() {
-            this.showEmail = !this.showEmail;
-            if (!this.email.isRead) this.email.isRead = true;
-            console.log(this.showEmail);
-        }
+    formattedSubjectText() {
+      return this.email.subject.slice(0, 20);
     },
+    classStyleRead() {
+      if (this.email.isRead) return 'fas fa-envelope-open';
+      else return 'fas fa-envelope';
+    },
+    classStar() {
+      if (this.email.isStarred) return 'fas fa-star checked';
+      else return 'far fa-star';
+    },
+    classIsRead() {
+      if (this.email.isRead) return 'read';
+      else return 'unread';
+    },
+  },
 
-    components: {
+  methods: {
+    toggleRead() {
+      console.log('test');
+      this.email.isRead = !this.email.isRead;
+      emailService.updateEmail(this.email).then((email) => (this.email = email));
+    },
+    toggleStar() {
+      console.log('test');
+      this.email.isStarred = !this.email.isStarred;
+      emailService.updateEmail(this.email).then((email) => (this.email = email));
+    },
+    deleteEmail(emailId) {
+      this.$emit('remove', emailId);
+    },
+    openSmallPreview() {
+      this.showEmail = !this.showEmail;
+      if (!this.email.isRead) this.email.isRead = true;
+      console.log(this.showEmail);
+    },
+  },
 
-
-    }
-
-
-}
+  components: {},
+};

@@ -1,4 +1,3 @@
-import { eventBus } from '../../../services/event-bus-service.js';
 import textType from './text-type.cmp.js';
 import imgType from './img-type.cmp.js';
 import videoType from './video-type.cmp.js';
@@ -15,6 +14,7 @@ export default {
                   <span @click="$emit('showModel',note)"> <i class="far fa-edit"></i></span>
                   <span @click="showColors=true"> <i class="fas fa-palette"></i></span>
                   <span @click="$emit('clone',note)"> <i class="far fa-clone"></i></span>
+                  <span @click="$emit('email',note)"> <i class="fas fa-envelope-open-text"></i></span>
                   <span class="last-one" @click="changeImpotent"> <i :class="['fas fa-exclamation', setImportent]"></i></span>
                   <div v-show='showColors' :class="noteToolsColor" class="pallete">
                       <div @click="changeColor(num)" class="pallete-color color" :class="'color'+ num" v-for="num in colorNums" :key="num"  ></div>
@@ -44,6 +44,7 @@ export default {
       updatedNote.isPinned = this.importent;
       this.$emit('updated', updatedNote);
     },
+    createMail() {},
   },
   computed: {
     noteSize() {

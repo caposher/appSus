@@ -177,6 +177,10 @@ html {
   padding: 12px 10px;
 }
 
+.small-preview-body {
+  overflow-wrap: anywhere;
+}
+
 .email-show {
   /* display: flex;
   flex-direction: column; */
