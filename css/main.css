@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+html {
+  font-family: lato-regular;
+  font-size: 13px;
+}
+
 body {
   margin: 0;
 }
@@ -47,6 +52,16 @@ button {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   cursor: pointer;
+}
+
+@font-face {
+  font-family: lato-regular;
+  src: url('../fonts/Lato-Regular.ttf');
+}
+
+@font-face {
+  font-family: lato-bolt;
+  src: url('../fonts/Lato-Bolt.ttf');
 }
 
 .main-content {
