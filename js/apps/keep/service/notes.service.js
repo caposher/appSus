@@ -1,5 +1,5 @@
 import { storageService } from '../../../services/async-storage-service.js';
-export const notesService = { getNotes, addNote, removeNote, updateNote };
+export const notesService = { getNotes, addNote, removeNote, updateNote, getEmptyNote };
 
 const NOTES_KEY = 'notes';
 const gList = [
@@ -97,4 +97,15 @@ function removeNote(noteId) {
 
 function updateNote(note) {
   return storageService.put(NOTES_KEY, note).then(() => getNotes());
+}
+
+function getEmptyNote() {
+  return {
+    type: 'note-txt',
+    isPinned: false,
+    color: 'color1',
+    info: {
+      txt: '',
+    },
+  };
 }
