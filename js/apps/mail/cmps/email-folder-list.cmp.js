@@ -5,7 +5,7 @@ export default {
     name: 'email-folder-list',
     props: ['emails'],
     template: `
-        <section class="email-folders">
+        <section class="side email-folders">
             <button class="compose" @click="composeEmail"><img src="" />Compose</button>
 
             <div class="inbox" @click= "openFolder('inbox')" :class="styleClassFolder">
@@ -45,7 +45,7 @@ export default {
             // if (this.isDraftOpen) return
             // eventBus.$emit('openCompose')
             // eventBus.$emit('composeEmail')
-            // this.isDraftOpen = true;
+            // this.isDraft = true;
         }
     },
     computed: {

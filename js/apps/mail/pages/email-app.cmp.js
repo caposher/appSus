@@ -11,7 +11,11 @@ export default {
         <section v-if="emails" class="email-app app-main">
             <email-folder-list @folderUpdate="openRelevantFolder" @compose="isCompose"
              :emails="emails"/>
+
+             <!-- <nav @click = "toggleFilters" class = "nav-container" >
+                <button  class="menu-btn" >☰</button> -->
             <div class="email-content">
+                <!-- <button class="menu-btn" v-on:click="toggleMenu">☰</button> -->
                 <email-filter @filtered="setFilter"/>
                 <email-list @removeEmail="removeEmailFromList" :emails="emailsToShow" />
                 <email-compose v-if="composeEmail" :composeEmail = "composeEmail" @close="closeComposeEmail" @send="sendEmail" @deleteCompose="composeEmail=false"/>
@@ -99,7 +103,10 @@ export default {
                     };
                     eventBus.$emit('showMsg', msg);
                 })
-        }
+        },
+        toggleMenu() {
+            this.openNav = !this.openNav
+        },
 
     },
 
@@ -151,7 +158,9 @@ export default {
         emailsUnread() {
             let emailsUnread = this.emails.filter(email => email.isRead === false)
             this.unreadEmails = emailsUnread.length;
-        }
+        },
+
+
 
 
     },

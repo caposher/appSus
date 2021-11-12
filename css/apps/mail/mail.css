@@ -32,7 +32,8 @@ html {
   /* clean-list */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* after adding section to preview */
+  /* align-items: center; */
 }
 
 .email-preview-container {
@@ -62,6 +63,18 @@ html {
 .body {
   flex: 3;
 }
+
+/* .subject{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-inline-end: 20px;
+} */
+
+.subject {
+  flex: 2;
+}
+
 .sent-at {
   /* flex: 1.5; */
 }
@@ -139,6 +152,29 @@ html {
 
 .checked {
   color: orange;
+}
+.email-small-preview-container {
+  border: 1px solid rgb(199, 187, 187);
+  padding: 1rem;
+}
+
+.small-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 5px;
+}
+.small-preview-from {
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+.small-preview-from span {
+  font-weight: normal;
+}
+
+.small-preview-body {
+  padding: 12px 10px;
 }
 
 .email-show {
@@ -237,4 +273,24 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.menu-btn {
+  display: none;
+}
+
+@media (max-width: 740px) {
+  .email-app {
+    justify-content: center;
+  }
+
+  .side {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+    margin-right: 10px;
+    z-index: 10;
+  }
 }

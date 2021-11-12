@@ -13,7 +13,8 @@ export const emailService = {
     getById,
     removeEmail,
     updateEmail,
-    sendEmail
+    sendEmail,
+    getEmptyEmail
 
 }
 function updateEmail(email) {
@@ -49,7 +50,7 @@ function getById(emailId) {
 }
 
 function sendEmail(email) {
-    email.id = utilService.makeId(4);
+    // email.id = utilService.makeId(4);
     email.from = loggedUser.fullName;
     email.fromEmail = loggedUser.email;
     email.isRead = false;
@@ -58,7 +59,23 @@ function sendEmail(email) {
     email.isDeleted = false;
     email.sentAt = Date.now();
     return storageService.post(EMAILS_KEY, email);
+}
 
+function getEmptyEmail() {
+    return {
+        subject: '',
+        body: '',
+        // isRead: false,
+        sentAt: Date.now(),
+        from: '',
+        fromEmail: '',
+        to: '',
+        isRead: false,
+        isStarred: false,
+        isDeleted: false,
+        isSent: false,
+        folder: 'inbox',
+    }
 }
 
 function _createEmails() {
