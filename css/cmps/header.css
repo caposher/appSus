@@ -12,6 +12,7 @@
 
 .header-logo {
   gap: 10px;
+  cursor: pointer;
 }
 
 .header-logo img {

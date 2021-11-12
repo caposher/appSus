@@ -2,7 +2,7 @@ export default {
   name: 'app-header',
   template: `
     <header class="app-header">
-      <div class="header-logo flex item-center">
+      <div @click="$router.push('/')" class="header-logo flex item-center">
     <img src="imgs/icon.png">
     <h2>AppSus</h2>
 </div >
