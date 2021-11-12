@@ -5,8 +5,8 @@ export default {
     name: 'email-preview',
     props: ['email'],
     template: `
-    <!-- <section class="email-row-container"> -->
-    <li class="email-preview-container" :class="classIsRead">
+    <section>
+    <li @click="openSmallPreview" class="email-preview-container" :class="classIsRead">
             <button @click.stop="toggleStar">
                     <span class="stars" :class="classStar"></span>
             </button>
@@ -20,9 +20,28 @@ export default {
                 <button @click= "deleteEmail(email.id)"> <i class="fas fa-trash"></i> </button>
             </div>
     </li>
-  
-<!-- </section> -->
+    <li v-if="showEmail" class="email-small-preview-container" >
+        <div class="small-preview">
+             <h3 class="small-preview-subject"> {{ email.subject }} </h3>
+             <div class=small-preview-buttons>
+                <router-link :to="'email/' + email.id"> <i class="fas fa-expand"></i> </router-link>
+                <button @click.stop="replyToEmail" > <i class="fas fa-reply"></i> </button>
+                <button @click.stop="saveAsNote"> <i class="fas fa-paper-plane"></i> </button >
+                <!-- <button @click.stop="deleteEmail(email.id)" title = "Delete" > <i class="fas fa-trash"></i> </button > -->
+            </div >
+         </div >
+         <p class="small-preview-from"> {{ email.from }} <span> <{{ email.fromEmail }}> </span> </p>
+         <p class="small-preview-body"> {{ email.body }} </p>
+     </li>
+</section>
     `,
+
+    data() {
+        return {
+            showEmail: false,
+        }
+    },
+
     computed: {
         formattedDate() {
             var dateObj = new Date();
@@ -30,16 +49,16 @@ export default {
             var day = dateObj.getUTCDate();
             var year = dateObj.getUTCFullYear();
             var newdate = day + "/" + month + "/" + year;
-            return newdate;
-            // return new Date().toString().slice(4, 7); //month
+            // return newdate;
+            return new Date().toString().slice(4, 7) + ' ' + day; //month
             // var date = new Date(this.email.sentAt);
             // return (this.email.sentAt) ? date.toLocaleString() : '';
         },
         formattedBodyText() {
-            return this.email.body.slice(0, 30);
+            return this.email.body.slice(0, 40);
         },
         formattedSubjectText() {
-            return this.email.body.slice(0, 10);
+            return this.email.body.slice(0, 20);
         },
         classStyleRead() {
             if (this.email.isRead) return 'fas fa-envelope-open'
@@ -74,6 +93,11 @@ export default {
         deleteEmail(emailId) {
             this.$emit('remove', emailId);
         },
+        openSmallPreview() {
+            this.showEmail = !this.showEmail;
+            if (!this.email.isRead) this.email.isRead = true;
+            console.log(this.showEmail);
+        }
     },
 
     components: {

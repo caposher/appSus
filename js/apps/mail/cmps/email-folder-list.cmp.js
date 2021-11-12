@@ -1,9 +1,12 @@
+// import { eventBus } from "../../../services/event-bus-service";
+// import { emailService } from "../service/email-service";
+
 export default {
     name: 'email-folder-list',
     props: ['emails'],
     template: `
-        <section class="email-folders">
-            <button class="compose"><img src="" />Compose</button>
+        <section class="side email-folders">
+            <button class="compose" @click="composeEmail"><img src="" />Compose</button>
 
             <div class="inbox" @click= "openFolder('inbox')" :class="styleClassFolder">
                 <span> <i class="fas fa-inbox"></i> </span> 
@@ -34,29 +37,20 @@ export default {
     },
     methods: {
         openFolder(folder) {
-            // if (!this.filterBy) return this.emails;
-            // // console.log('this.filterBy.text', this.filterBy.text);
-            // const searchStr = this.filterBy.text.toLowerCase();
-            // // console.log('searchStr', searchStr);
-            // let emailsToShow = this.emails;
-            // if (this.filterBy.emailStatus === 'read')
-            //     emailsToShow = emailsToShow.filter(email => email.isRead === true);
-            // else if (this.filterBy.emailStatus === 'unread')
-            //     emailsToShow = emailsToShow.filter(email => email.isRead === false);
-
-            // emailsToShow = emailsToShow.filter(email =>
-            //     (email.body.toLowerCase().includes(searchStr)) || (email.subject.toLowerCase().includes(searchStr)));
-            // emailsToShow = emailsToShow;
-
-            // // console.log('emailsToShow', emailsToShow);
-            // return emailsToShow;
-
             this.currFolder = folder;
-            this.$emit('folderUpdate', this.currFolder);
+            this.$emit('folderUpdate', folder);
+        },
+        composeEmail() {
+            this.$emit('compose');
+            // if (this.isDraftOpen) return
+            // eventBus.$emit('openCompose')
+            // eventBus.$emit('composeEmail')
+            // this.isDraft = true;
         }
     },
     computed: {
         styleClassFolder() {
+            return 'mark-folder';
         }
     }
 }
