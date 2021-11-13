@@ -33,8 +33,8 @@ export default {
         return {
             email: null,
             // saveDraft: false
-            isSaveDraft: false
-
+            isSaveDraft: false,
+            emailToReply: null
         }
     },
     created() {
@@ -42,10 +42,19 @@ export default {
             to: '',
             subject: '',
             body: ''
+        };
+        const { emailId } = this.$route.params;
+        if (emailId) {
+            emailService.getById(emailId)
+                .then(email => this.emailToReply = email);
+            // } else {
+            //     this.carToEdit = carService.getEmptyCar();
+            // }
         }
+
     },
 
-    monuted() {
+    mounted() {
         this.$refs.to.focus();
 
     },
@@ -107,8 +116,26 @@ export default {
         },
     },
 
+    // watch: {
+    //     '$route': {
+    //         handler() {
+    //             this.$emit('openReplyCompose')
+    //             // this.composeEmail = true;
+    //             console.log(this.$route.query);
+    //             this.email.to = this.$route.query.to
+    //             this.email.subject = this.$route.query.subject
+    //             this.email.body = this.$route.query.body
+    //         },
+    //         immediate: true
 
+    //     },
 }
+    // this.$router.push({ path: `/mail/compose?subject=${note.info.title}` })
+
+
+
+
+
 
 
 

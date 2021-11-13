@@ -54,6 +54,27 @@ button {
   border: none;
   cursor: pointer;
 }
+/* /////////// */
+.about-container {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+}
+
+.me-content {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.me-content .my-image {
+  width: 400px;
+  /* height: 400px; */
+  border-radius: 10px;
+}
+/* ////////////////// */
 
 @font-face {
   font-family: lato-regular;

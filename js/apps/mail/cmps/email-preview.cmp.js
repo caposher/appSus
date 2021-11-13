@@ -25,7 +25,7 @@ export default {
              <h3 class="small-preview-subject"> {{ email.subject }} </h3>
              <div class=small-preview-buttons>
                 <router-link :to="'email/' + email.id"> <i class="fas fa-expand"></i> </router-link>
-                <button @click.stop="replyToEmail()" > <i class="fas fa-reply"></i> </button>
+                <button @click.stop="replyToEmail(email)" > <i class="fas fa-reply"></i> </button>
                 <button @click.stop="saveAsNote(email)"> <i class="fas fa-paper-plane"></i> </button >
                 <!-- <button @click.stop="deleteEmail(email.id)" title = "Delete" > <i class="fas fa-trash"></i> </button > -->
             </div >
@@ -105,7 +105,7 @@ export default {
         saveAsNote(email) {
             this.$emit('saveAsNote', email);
         },
-        replyToEmail() {
+        replyToEmail(email) {
             //            this.$router.push('/keep');
             // console.log('this.$route.path', this.$route.path)
             // console.log('this.$route.params', this.$route.params);
@@ -119,8 +119,10 @@ export default {
             //         this.emailReply = email;
             //     })
 
-            // const mail = this.emailReply;
-            // this.$router.push(`compose&&from=${mail.fromEmail}&subject=Re:${mail.subject}&body=${mail.body}`);
+            // const email = this.emailReply;
+            this.emailReply = email;
+            console.log('this.emailReply', this.emailReply);
+            this.$router.push(`compose?to=${this.emailReply.to}&subject=Re:${this.emailReply.subject}&body=${this.emailReply.body}`);
 
         }
     },
