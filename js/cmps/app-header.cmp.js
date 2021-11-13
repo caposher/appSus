@@ -10,7 +10,7 @@ export default {
       <img  src="../imgs/dashboard.png">
       <div v-show="showList" class="naviagtion">
         <router-link  to="/"><i class="fas fa-home"></i></router-link>
-        <router-link @click="showList = false" to="/books"><i class="fas fa-book"></i></router-link>
+        <router-link @click="showList = false" to="/book"><i class="fas fa-book"></i></router-link>
         <router-link @click="showList = false" to="/email"><i class="fas fa-envelope-square"></i></router-link>
         <router-link @click="showList = false" to="/keep"><i class="fas fa-sticky-note"></i></router-link>
       </div>

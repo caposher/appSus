@@ -9,7 +9,7 @@ export default {
                 <h3> New Message </h3> 
                 <button @click="exitAndSaveDraft" class="exit-btn"> <i class="fas fa-times"></i> </button>
             </div>
-            <form class="email-input-container" @submit.prevent="sendEmail">
+            <form class="input-container" @submit.prevent="sendEmail">
                 <div class="compose-to"> 
                     <input class="input-email" ref="to" type="email" v-model="email.to" placeholder="To" @input="debounce(saveDraft,5000)"/>    
                 </div>
@@ -34,6 +34,7 @@ export default {
       email: null,
       // saveDraft: false
       isSaveDraft: false,
+      emailToReply: null,
     };
   },
   created() {
@@ -42,9 +43,16 @@ export default {
       subject: '',
       body: '',
     };
+    const { emailId } = this.$route.params;
+    if (emailId) {
+      emailService.getById(emailId).then((email) => (this.emailToReply = email));
+      // } else {
+      //     this.carToEdit = carService.getEmptyCar();
+      // }
+    }
   },
 
-  monuted() {
+  mounted() {
     this.$refs.to.focus();
   },
   methods: {
@@ -102,4 +110,19 @@ export default {
       }
     },
   },
+
+  // watch: {
+  //     '$route': {
+  //         handler() {
+  //             this.$emit('openReplyCompose')
+  //             // this.composeEmail = true;
+  //             console.log(this.$route.query);
+  //             this.email.to = this.$route.query.to
+  //             this.email.subject = this.$route.query.subject
+  //             this.email.body = this.$route.query.body
+  //         },
+  //         immediate: true
+
+  //     },
 };
+// this.$router.push({ path: `/mail/compose?subject=${note.info.title}` })
