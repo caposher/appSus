@@ -12,7 +12,7 @@
 }
 
 .text-input {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .note-tools {
@@ -23,11 +23,11 @@
 }
 
 .note-tools span:first-child {
-  padding-inline-end: 48px;
+  padding-inline-end: 30px;
 }
 
 .note-tools .last-one {
-  padding-inline-start: 30px;
+  padding-inline-start: 17px;
 }
 
 .note-tools span {

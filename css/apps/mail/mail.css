@@ -178,7 +178,8 @@ html {
 }
 
 .small-preview-body {
-  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .email-show {

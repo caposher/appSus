@@ -121,8 +121,7 @@ function _createEmails() {
       {
         id: utilService.makeId(4),
         subject: 'Welcome to GitGuardian!',
-        body: `Thank you for trusting GitGuardian! We are now able to secure the repositories you grant us access to.
-                As shown below, you are currently under our free tier for developers and Open Source. Additionally, you can start a 30-day trial of our Business plan, at any time, to secure your private collaborative repositories.`,
+        body: `Thank you for trusting GitGuardian! We are now able to secure the repositories you grant us access to.\n As shown below, you are currently under our free tier for developers and Open Source. Additionally, you can start a 30-day trial of our Business plan, at any time, to secure your private collaborative repositories.`,
         // isRead: false,
         sentAt: 1551134830594,
         from: 'GitGuardian',
@@ -137,8 +136,7 @@ function _createEmails() {
       {
         id: utilService.makeId(4),
         subject: 'Your Dropbox is lonely. Add some files!',
-        body: `Add files to your Dropbox
-                Once your files are in Dropbox, they’ll be waiting for you anywhere you install the app—like your computer, phone, or tablet. Your files will also be securely backed up and easy to share, no matter what type of files they are.`,
+        body: `Add files to your Dropbox Once your files are in Dropbox, they’ll be waiting for you anywhere you install the app—like your computer, phone, or tablet. Your files will also be securely backed up and easy to share, no matter what type of files they are.`,
         // isRead: false,
         sentAt: 1551134830594,
         from: 'Molly',

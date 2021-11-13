@@ -36,26 +36,26 @@ export default {
       notesService
         .removeNote(id)
         .then(this.setNotes)
-        .then(eventBus.$emit('showMsg', { txt: 'Note removed', type: 'success' }));
+        .then(eventBus.$emit('showMsg', { txt: 'The note has been deleted', type: 'success' }));
     },
     setNewNote(note) {
       notesService
         .addNote(note)
         .then(this.setNotes)
-        .then(eventBus.$emit('showMsg', { txt: 'New note created', type: 'success' }));
+        .then(eventBus.$emit('showMsg', { txt: 'A new note has been created', type: 'success' }));
     },
     editNote(note) {
       notesService
         .updateNote(note)
         .then(this.setNotes)
-        .then(eventBus.$emit('showMsg', { txt: 'Note updated', type: 'success' }));
+        .then(eventBus.$emit('showMsg', { txt: 'Note has been updated', type: 'success' }));
       this.noteInModel = null;
     },
     cloneNote(note) {
       notesService
         .addNote(note)
         .then(this.setNotes)
-        .then(eventBus.$emit('showMsg', { txt: 'Note duplicated', type: 'success' }));
+        .then(eventBus.$emit('showMsg', { txt: 'The note has been duplicated', type: 'success' }));
     },
     showModel(note) {
       this.noteInModel = note;

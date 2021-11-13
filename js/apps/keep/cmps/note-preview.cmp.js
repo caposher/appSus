@@ -7,7 +7,7 @@ export default {
   name: 'note-preview',
   template: ` <section :class="[noteSize, noteColor]" class="note-preview flex flex-column content-center space-between">
                 <text-type v-if="note.type === 'note-txt'" :txt="note.info.txt"/>
-                <img-type v-else-if="note.type === 'note-img'" :url="note.info.txt"/>
+                <img-type @click.native="$emit('showModel',note)" v-else-if="note.type === 'note-img'" :url="note.info.txt"/>
                 <video-type v-else-if="note.type === 'note-video'" :id="note.info.videoId"/>
                 <div :class="noteToolsColor" class="note-tools">
                   <span @click="$emit('removed',note.id)"> <i class="far fa-trash-alt"></i> </span>
@@ -61,8 +61,9 @@ export default {
           break;
 
         case 'note-img':
-        case 'note-video':
           noteSize = 'medium-note';
+        case 'note-video':
+          noteSize = 'normal-note';
       }
       return noteSize;
     },
