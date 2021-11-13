@@ -14,9 +14,22 @@ export const emailService = {
     removeEmail,
     updateEmail,
     sendEmail,
-    getEmptyEmail
+    getEmptyEmail,
+    saveEmailDraft
 
 }
+
+function saveEmailDraft(draft) {
+    return getById(draft.id)
+        .then(email => {
+            if (email) return storageService.put(EMAILS_KEY, draft)
+            else {
+                return storageService.post(EMAILS_KEY, draft);
+            }
+        })
+
+}
+
 function updateEmail(email) {
     return storageService.put(EMAILS_KEY, email);
 }
@@ -58,6 +71,7 @@ function sendEmail(email) {
     // email.isSent = true;
     email.isStarred = false;
     email.isDeleted = false;
+    // email.isDraft = 
     email.sentAt = Date.now();
     return storageService.post(EMAILS_KEY, email);
 }

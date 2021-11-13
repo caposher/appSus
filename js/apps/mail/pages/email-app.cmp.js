@@ -32,7 +32,7 @@ export default {
             },
             folder: 'inbox',
             composeEmail: false,
-            emailToCompose: null,
+            // emailToCompose: null,
             unreadEmails: 0
         };
     },
@@ -81,7 +81,7 @@ export default {
             this.composeEmail = true;
         },
         closeComposeEmail() {
-            this.emailToCompose = null;
+            // this.emailToCompose = null;
             this.composeEmail = false;
         },
         sendAsNote(email) {
@@ -149,9 +149,13 @@ export default {
 
                 // return emailsToShow;
             }
-
-            // folders addition
-            if (this.folder === 'starred') {
+            //
+            // folders addition // added
+            if (this.folder === 'inbox') {
+                emailsToShow = emailsToShow.filter(email => !email.isSent && !email.isDeleted && !email.isDraft);
+            }
+            //changed
+            else if (this.folder === 'starred') {
                 emailsToShow = emailsToShow.filter(email => email.isStarred);
             }
             else if (this.folder === 'sent') {
@@ -161,6 +165,10 @@ export default {
                 emailsToShow = this.emails.filter(email => email.isDeleted);
                 console.log('emailsIsTrashed', emailsToShow);
             }
+            else if (this.folder === 'drafts') {
+                emailsToShow = this.emails.filter(email => email.isDraft && !email.isSent);
+                console.log('emailsIsDrafts', emailsToShow);
+            }
             // emailsToShow = emailsToShow.filter(email =>
             //     (email.body.toLowerCase().includes(searchStr)) || (email.subject.toLowerCase().includes(searchStr)));
 
@@ -169,10 +177,7 @@ export default {
             return emailsToShow;
         },
 
-        emailsUnread() {
-            let emailsUnread = this.emails.filter(email => email.isRead === false)
-            this.unreadEmails = emailsUnread.length;
-        },
+
 
 
 
@@ -193,6 +198,11 @@ export default {
             }
             else if (this.folder === 'sent') {
                 emailsShow = this.emails.filter(email => email.isSent);
+                this.emails = emailsShow;
+                console.log(emailsShow);
+            }
+            else if (this.folder === 'drafts') {
+                emailsShow = this.emails.filter(email => email.isDraft);
                 this.emails = emailsShow;
                 console.log(emailsShow);
             }

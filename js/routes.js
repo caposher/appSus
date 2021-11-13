@@ -16,7 +16,6 @@ const routes = [
   {
     path: '/email',
     component: emailPage,
-
     children: [{
       path: '/compose',
       component: emailCompose
@@ -31,5 +30,8 @@ const routes = [
     component: keepPage,
   },
 ];
+
+
+
 
 export const router = new VueRouter({ routes });

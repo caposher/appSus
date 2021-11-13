@@ -113,7 +113,9 @@ html {
 }
 
 .email-folders {
-  padding: 30px;
+  /* padding: 30px; */
+  padding: 8px;
+  margin: 15px;
 }
 
 .email-folders > * {
@@ -124,23 +126,49 @@ html {
   font-size: 1rem;
   margin-block-end: 10px;
   cursor: pointer;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  border-radius: 2rem;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
 }
 
 .email-folders > *:hover {
   background-color: rgba(222, 228, 228, 0.8);
-  border-radius: 300px;
+  border-radius: 2rem;
+  background-color: silver;
+  width: 100%;
+  /* padding: 15px; */
+}
+
+.styleFolder {
+  background-color: silver;
+  width: 100%;
+  border-radius: 2rem;
+  padding: 15px;
 }
 
 /* add red to inbox and num of unread */
 
-.compose {
-  padding: 20px 30px;
+.compose-btn {
+  /* padding: 20px 30px;
   border: 1px solid grey;
-  border-radius: 20px;
+  border-radius: 20px; */
+
+  padding: 20px 10px;
+  border: 1px solid grey;
+  border-radius: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin: 0.7rem;
+  width: 10rem;
+  font-size: 1rem;
+}
+
+.compose-btn img {
+  width: 40px;
 }
 
 .email-folders > div > span > i {
