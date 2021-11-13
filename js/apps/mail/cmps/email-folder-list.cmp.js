@@ -2,11 +2,11 @@
 // import { emailService } from "../service/email-service";
 
 export default {
-    name: 'email-folder-list',
-    props: ['emails'],
-    template: `
+  name: 'email-folder-list',
+  props: ['emails'],
+  template: `
         <section class="side email-folders-container">
-            <button class="compose-btn" @click="composeEmail"><img src="imgs/compose.png"/>Compose</button>
+            <button class="compose-btn" @click="composeEmail"><img src="imgs/compose.png"/><p>Compose</p></button>
             <div class="email-folders">    
                 <div class="inbox-folder" @click= "openFolder('inbox')" :class="{styleFolder: this.currFolder==='inbox'}">
                     <span> <i class="fas fa-inbox"></i> </span> 
@@ -41,37 +41,32 @@ export default {
       
         </section>
     `,
-    data() {
-        return {
-
-            currFolder: 'inbox',
-            unreadEmails: 0
-        }
+  data() {
+    return {
+      currFolder: 'inbox',
+      unreadEmails: 0,
+    };
+  },
+  methods: {
+    openFolder(folder) {
+      this.currFolder = folder;
+      this.$emit('folderUpdate', folder);
     },
-    methods: {
-        openFolder(folder) {
-            this.currFolder = folder;
-            this.$emit('folderUpdate', folder);
-        },
-        composeEmail() {
-            this.$emit('compose');
-            this.$router.push('compose');//
+    composeEmail() {
+      this.$emit('compose');
+      this.$router.push('compose'); //
 
-            // if (this.isDraftOpen) return
-            // eventBus.$emit('openCompose')
-            // eventBus.$emit('composeEmail')
-            // this.isDraft = true;
-        }
+      // if (this.isDraftOpen) return
+      // eventBus.$emit('openCompose')
+      // eventBus.$emit('composeEmail')
+      // this.isDraft = true;
     },
-    computed: {
-        // emailsUnread() {
-        //     let emailsUnread = this.emails.filter(email => !email.isRead)
-        //     this.unreadEmails = emailsUnread.length;
-        //     return this.unreadEmails;
-        // },
-    }
-}
-
-
-
-
+  },
+  computed: {
+    // emailsUnread() {
+    //     let emailsUnread = this.emails.filter(email => !email.isRead)
+    //     this.unreadEmails = emailsUnread.length;
+    //     return this.unreadEmails;
+    // },
+  },
+};
