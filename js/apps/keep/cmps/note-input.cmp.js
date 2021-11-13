@@ -35,7 +35,8 @@ export default {
     newNote() {
       if (this.note.info.txt) {
         if (this.note.type === 'note-video') {
-          this.info.videoId = this.note.info.txt.split('?v=')[1];
+          debugger;
+          this.note.info.videoId = this.note.info.txt.split('?v=')[1].split('&')[0];
         }
         this.$emit('new-note', this.note);
         this.setEmptyNote();

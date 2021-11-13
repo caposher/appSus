@@ -24,6 +24,7 @@
   margin-block-end: 20px;
   max-width: 75vw;
   border-radius: 10px;
+  max-height: 450px;
 }
 
 @media (min-width: 700px) {
