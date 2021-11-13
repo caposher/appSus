@@ -1,7 +1,6 @@
-
 export default {
-    props: ['book'],
-    template: `
+  props: ['book'],
+  template: `
         <section class="review-add" v-if="book">
             <fieldset>
                 <legend>
@@ -19,68 +18,49 @@ export default {
         </section>
     `,
 
-    data() {
-        return {
-            // book: null,
-            bookReview: {
-                fName: 'Books Reader',
-                rate: 3,
-                readAt: new Date().toDateString(),
-                text: '',
-            },
-            reviewToggle: false,
-        }
-    },
-    mounted() {
-
-    },
-    created() {
-        this.bookReview.readAt = this.currDate
-
-
-    },
-    methods: {
-        resetReview() {
-            this.bookReview = {
-                text: '',
-                fullName: '',
-                readAt: new Date().toDateString(),
-                rate: 3
-            }
-        },
-
-        save() {
-            this.$emit('saveReview', this.bookReview)
-            this.resetReview()
-            this.toggleAddReview();
-
-        },
-        // delete(idx) {
-        //     this.$emit('deleteReview', idx)
-        //     this.resetReview()
-        //     this.toggleAddReviewMode();
-        // },
-
-        changeColor(num) {
-            this.bookReview.rate = num;
-            console.log('hello', num)
-        },
-
-        toggleAddReview() {
-
-            this.reviewToggle = !this.reviewToggle;
-        },
-    },
-    computed: {
-        currDate() {
-            // return new Date().toISOString().substring(0, 10);
-            const date = new Date();
-            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-        },
-
-        // bookId() {
-        //     return this.$route.params.bookId
-        // },
+  data() {
+    return {
+      bookReview: {
+        fName: 'Books Reader',
+        rate: 3,
+        readAt: new Date().toDateString(),
+        text: '',
+      },
+      reviewToggle: false,
+    };
+  },
+  mounted() {},
+  created() {
+    this.bookReview.readAt = this.currDate;
+  },
+  methods: {
+    resetReview() {
+      this.bookReview = {
+        text: '',
+        fullName: '',
+        readAt: new Date().toDateString(),
+        rate: 3,
+      };
     },
 
-}
+    save() {
+      this.$emit('saveReview', this.bookReview);
+      this.resetReview();
+      this.toggleAddReview();
+    },
+    changeColor(num) {
+      this.bookReview.rate = num;
+      console.log('hello', num);
+    },
+
+    toggleAddReview() {
+      this.reviewToggle = !this.reviewToggle;
+    },
+  },
+  computed: {
+    currDate() {
+      const date = new Date();
+      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    },
+  },
+};

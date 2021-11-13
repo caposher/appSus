@@ -89,16 +89,19 @@ button {
 .main-content {
   min-height: 80vh;
   background-color: hsl(211, 100%, 96%);
-  /* background-image: url('../imgs/background.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain; */
 }
 
-.home-page h1 {
+.app-home-page {
+  background-image: url('../imgs/horse.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.app-home-page h1 {
   font-size: 65px;
   padding-block-start: 50px;
-  color: #b1d5e7fc;
+  color: #184160c9;
   padding-inline-start: 34px;
 }
 

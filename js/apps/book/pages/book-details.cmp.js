@@ -1,21 +1,15 @@
-import longText from '../../book/cmps/long-text.cmp.js'
-import reviewAdd from '../../book/cmps/review-add.cmp.js'
+import longText from '../../book/cmps/long-text.cmp.js';
+import reviewAdd from '../../book/cmps/review-add.cmp.js';
 import { bookService } from '../../book/service/book-service.js';
 import { eventBus } from '../../../services/event-bus-service.js';
 
-
 export default {
-    // props: ['book'],
-    template: `
+  template: `
         <section v-if="book" class="book-details app-main">
             <div class="book-details-content">
-            <!-- <h3>Book Details:</h3> -->
             <h2 class="book-title">{{book.title}}</h2>
             <p :class="priceClassStyle" >Price: {{ formatCurrency}}</p>
             <p class = "sale">{{bookOnSale}}</p>
-            <!-- <img class="sale-img" v-if="book.listPrice.isOnSale" src='./../img/sale.png'/> -->
-
-            <!-- <p>Subtitle : {{book.subtitle}}</p> -->
             <div class="book-categories-container">
                 <span v-for="category in book.categories" :key="category.id"> {{ category }} </span>
             </div>
@@ -33,7 +27,6 @@ export default {
             <fieldset>
                  <legend>Reviews</legend>
                 <ul class="clean-list">
-                    <!-- <h4> Reviews </h4> -->
                     <li v-for="(review, idx) in book.reviews">
                         <button @click="removeReview(idx)" title="Delete_Review">
                             <i class="fas fa-trash-alt"></i>
@@ -57,133 +50,114 @@ export default {
             <h2>Loading...</h2>
         </section>
     `,
-    data() {
-        return {
-            book: null,
-            nextBookId: null,
-            prevBookId: null
-        };
+  data() {
+    return {
+      book: null,
+      nextBookId: null,
+      prevBookId: null,
+    };
+  },
+  created() {
+    const { bookId } = this.$route.params;
+    bookService.getById(bookId).then((book) => (this.book = book));
+  },
+  methods: {
+    addReview(review) {
+      bookService
+        .addReview(this.book.id, review)
+        .then((book) => (this.book = book))
+        .then(() => {
+          const msg = {
+            txt: `The review on book: ${this.book.title}  was Added!`,
+            type: 'success',
+          };
+          eventBus.$emit('showMsg', msg);
+        })
+        .catch((err) => {
+          console.log('err', err);
+          const msg = {
+            txt: 'Error. Please try later',
+            type: 'error',
+          };
+          eventBus.$emit('showMsg', msg);
+        });
     },
-    created() {
+    removeReview(idx) {
+      this.book.reviews.splice(idx, 1);
+      bookService
+        .removeReview(this.book.id, idx)
+        .then(() => {
+          const msg = {
+            txt: `Review was removed`,
+            type: 'success',
+          };
+          eventBus.$emit('showMsg', msg);
+        })
+        .catch((err) => {
+          console.log('err', err);
+          const msg = {
+            txt: 'Error. Please try later',
+            type: 'error',
+          };
+          eventBus.$emit('showMsg', msg);
+        });
+    },
+    close() {
+      this.$router.push('/book');
+    },
+  },
+
+  computed: {
+    bookOnSale() {
+      var isOnSale = this.book.listPrice.isOnSale;
+      if (isOnSale) {
+        return 'sale!';
+      } else {
+        return '';
+      }
+    },
+
+    pageCountString() {
+      var pageCount = this.book.pageCount;
+      if (pageCount > 500) return 'long reading';
+      else if (pageCount > 200) return 'Decent Reading';
+      else if (pageCount < 100) return 'Light Reading';
+    },
+
+    publishedDateString() {
+      if (new Date().getFullYear() - this.book.publishedDate >= 10) return '(Veteran Book)';
+      else if (new Date().getFullYear() - this.book.publishedDate <= 1) return '(New)';
+    },
+
+    priceClassStyle() {
+      if (this.book.listPrice.amount > 150) {
+        return 'red';
+      } else if (this.book.listPrice.amount < 20) {
+        return 'green';
+      }
+    },
+    formatCurrency() {
+      return new Intl.NumberFormat(this.book.language, {
+        style: 'currency',
+        currency: this.book.listPrice.currencyCode,
+      }).format(this.book.listPrice.amount);
+    },
+  },
+  watch: {
+    '$route.params.bookId': {
+      handler() {
         const { bookId } = this.$route.params;
-        bookService.getById(bookId)
-            .then(book => this.book = book);
+        bookService.getById(bookId).then((book) => {
+          this.book = book;
+          bookService.getPrevBookId(book.id).then((prevBookId) => (this.prevBookId = prevBookId));
+          bookService.getNextBookId(book.id).then((nextBookId) => (this.nextBookId = nextBookId));
+        });
+      },
+      immediate: true,
     },
-    methods: {
-        addReview(review) {
-            bookService.addReview(this.book.id, review)
-                .then(book => this.book = book)
-                .then(() => {
-                    const msg = {
-                        txt: `The review on book: ${this.book.title}  was Added!`,
-                        type: 'success'
-                    };
-                    eventBus.$emit('showMsg', msg);
-                })
-                .catch(err => {
-                    console.log('err', err);
-                    const msg = {
-                        txt: 'Error. Please try later',
-                        type: 'error'
-                    };
-                    eventBus.$emit('showMsg', msg);
-                });
-        },
-        removeReview(idx) {
-            this.book.reviews.splice(idx, 1)
-            bookService.removeReview(this.book.id, idx)
-                .then(() => {
-                    const msg = {
-                        txt: `Review was removed`,
-                        type: 'success'
-                    };
-                    eventBus.$emit('showMsg', msg);
-                })
-                .catch(err => {
-                    console.log('err', err);
-                    const msg = {
-                        txt: 'Error. Please try later',
-                        type: 'error'
-                    };
-                    eventBus.$emit('showMsg', msg);
-                });
-        },
-        close() {
-            this.$router.push('/book');
-        }
-    },
-
-    computed: {
-        bookOnSale() {
-            var isOnSale = this.book.listPrice.isOnSale;
-            // console.log(isOnSale)
-            if (isOnSale) {
-                return 'sale!'
-            }
-            else {
-                return ''
-            }
-        },
-
-        pageCountString() {
-            var pageCount = this.book.pageCount;
-            if (pageCount > 500)
-                return 'long reading';
-            else if (pageCount > 200)
-                return 'Decent Reading';
-            else if (pageCount < 100)
-                return 'Light Reading'
-        },
-
-        publishedDateString() {
-            // var publishedDate = this.book.publishedDate;
-            // console.log(publishedDate)
-            // if (publishedDate <= 2011) {
-            //     return 'Veteran Book';
-            // }
-            // else if (publishedDate >= 2021) {
-            //     return 'New';
-            // }
-
-            if (new Date().getFullYear() - this.book.publishedDate >= 10)
-                return '(Veteran Book)';
-            else if (new Date().getFullYear() - this.book.publishedDate <= 1)
-                return '(New)';
-        },
-
-        priceClassStyle() {
-            if (this.book.listPrice.amount > 150) {
-                return 'red';
-            }
-            else if (this.book.listPrice.amount < 20) {
-                return 'green';
-            }
-        },
-        formatCurrency() {
-            return new Intl.NumberFormat(this.book.language, {
-                style: 'currency',
-                currency: this.book.listPrice.currencyCode,
-            }).format(this.book.listPrice.amount);
-        }
-    },
-    watch: {
-        '$route.params.bookId': {
-            handler() {
-                const { bookId } = this.$route.params;
-                bookService.getById(bookId)
-                    .then(book => {
-                        this.book = book;
-                        bookService.getPrevBookId(book.id)
-                            .then(prevBookId => this.prevBookId = prevBookId)
-                        bookService.getNextBookId(book.id)
-                            .then(nextBookId => this.nextBookId = nextBookId);
-                    })
-            },
-            immediate: true
-        }
-    },
-    components: {
-        longText,
-        reviewAdd,
-    }
-}
+  },
+  components: {
+    longText,
+    reviewAdd,
+  },
+};
