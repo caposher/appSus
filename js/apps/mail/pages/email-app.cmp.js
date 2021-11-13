@@ -12,8 +12,9 @@ export default {
             <email-folder-list @folderUpdate="openRelevantFolder" @compose="isCompose"
              :emails="emails"/>
 
-             <!-- <nav @click = "toggleFilters" class = "nav-container" >
-                <button  class="menu-btn" >☰</button> -->
+             <nav @click = "toggleFilters" class = "nav-container" >
+                <button  class="menu-btn" >☰</button>
+            </nav>
             <div class="email-content">
                 <!-- <button class="menu-btn" v-on:click="toggleMenu">☰</button> -->
                 <email-filter @filtered="setFilter"/>
