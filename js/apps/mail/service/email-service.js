@@ -36,7 +36,7 @@ function removeEmail(emailId) {
 }
 
 function query() {
-  return storageService.query(EMAILS_KEY);
+  return storageService.query(EMAILS_KEY).then((emails) => emails.reverse());
 }
 
 function getById(emailId) {
