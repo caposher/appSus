@@ -205,6 +205,11 @@ html {
   padding: 12px 10px;
 }
 
+.small-preview-body {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
 .email-show {
   /* display: flex;
   flex-direction: column; */

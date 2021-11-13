@@ -10,6 +10,11 @@
 .note-preview p {
   white-space: pre-wrap;
 }
+
+.text-input {
+  overflow-wrap: break-word;
+}
+
 .note-tools {
   position: relative;
   padding: 5px;
@@ -18,11 +23,11 @@
 }
 
 .note-tools span:first-child {
-  padding-inline-end: 48px;
+  padding-inline-end: 30px;
 }
 
 .note-tools .last-one {
-  padding-inline-start: 30px;
+  padding-inline-start: 17px;
 }
 
 .note-tools span {

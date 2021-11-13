@@ -6,11 +6,25 @@ export default {
     <img src="imgs/icon.png">
     <h2>AppSus</h2>
 </div >
-    <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/email">Email</router-link>
-      <router-link to="/keep">Keep</router-link>
+    <nav class="dashboard" @click="toggleList">
+      <img  src="../imgs/dashboard.png">
+      <div v-show="showList" class="naviagtion">
+        <router-link  to="/"><i class="fas fa-home"></i></router-link>
+        <router-link @click="showList = false" to="/books"><i class="fas fa-book"></i></router-link>
+        <router-link @click="showList = false" to="/email"><i class="fas fa-envelope-square"></i></router-link>
+        <router-link @click="showList = false" to="/keep"><i class="fas fa-sticky-note"></i></router-link>
+      </div>
     </nav>
     </header>
     `,
+  data() {
+    return {
+      showList: false,
+    };
+  },
+  methods: {
+    toggleList() {
+      this.showList = !this.showList;
+    },
+  },
 };
