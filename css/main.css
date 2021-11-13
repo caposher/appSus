@@ -28,13 +28,13 @@ p {
 a {
   color: black;
   text-decoration: none;
-  box-shadow: 0px 3px 0 black;
+  /* box-shadow: 0px 3px 0 black; */
   font-weight: bold;
 }
 
 a:hover {
   color: hsl(200, 53%, 80%);
-  box-shadow: 0px 3px 0 hsl(202, 53%, 60%);
+  /* box-shadow: 0px 3px 0 hsl(202, 53%, 60%); */
 }
 
 ul {
@@ -89,20 +89,34 @@ button {
 .main-content {
   min-height: 80vh;
   background-color: hsl(211, 100%, 96%);
+  /* background-image: url('../imgs/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; */
+}
+
+.home-page h1 {
+  font-size: 65px;
+  padding-block-start: 50px;
+  color: #b1d5e7fc;
+  padding-inline-start: 34px;
 }
 
 .user-msg {
   z-index: 100;
   position: fixed;
   bottom: 25px;
-  right: 25px;
 
-  min-width: 300px;
+  right: 50%;
+  transform: translateX(50%);
+  text-align: center;
+  min-width: calc(100% - 90px);
+
   border-radius: 10px;
   padding: 20px;
   box-shadow: 1px 1px 6px black;
   color: white;
-  font-weight: 600;
+  font-size: 14px;
 }
 
 .fade-enter-active,
@@ -111,7 +125,7 @@ button {
 }
 
 .success {
-  background-color: hsl(120, 40%, 46%);
+  background-color: #4c504c;
 }
 
 .error {
@@ -121,5 +135,14 @@ button {
 @media (min-width: 500px) {
   .main-width {
     max-width: calc(100% - 200px);
+  }
+}
+
+@media (min-width: 800px) {
+  .user-msg {
+    right: 25px;
+    min-width: 300px;
+    transform: translateX(0);
+    text-align: left;
   }
 }
