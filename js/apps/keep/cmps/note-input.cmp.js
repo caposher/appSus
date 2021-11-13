@@ -1,7 +1,7 @@
 export default {
   name: 'note-input',
   template: ` <section class="note-input flex justify-center item-center">
-                <div class="input-container main-width flex space-between">
+                <div class="note-input-container main-width flex space-between">
                 <section class="input flex item-center">
                   <textarea type="text"  v-model="note.info.txt" :placeHolder="[[setUserTxt]]"/>  
                   <span @click="newNote"><i class="fas fa-chevron-circle-right"></i></span>
