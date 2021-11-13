@@ -19,7 +19,7 @@ export default {
                 <!-- <button class="menu-btn" v-on:click="toggleMenu">☰</button> -->
                 <email-filter @filtered="setFilter"/>
                 <email-list @removeEmail="removeEmailFromList" @sendEmailAsNote="sendAsNote" :emails="emailsToShow" />
-                <email-compose v-if="composeEmail" :composeEmail = "composeEmail" @close="closeComposeEmail" @send="sendEmail" @deleteCompose="composeEmail=false"/>
+                <email-compose v-if="composeEmail" :replyCompose="replyToCompose" :composeEmail = "composeEmail" @close="closeComposeEmail" @send="sendEmail" @deleteCompose="composeEmail=false" @openReplyCompose="composeEmail=true"/>
             </div>
         </section>
     `,
@@ -32,7 +32,7 @@ export default {
             },
             folder: 'inbox',
             composeEmail: false,
-            // emailToCompose: null,
+            // replyToCompose: null,
             unreadEmails: 0
         };
     },
@@ -45,9 +45,11 @@ export default {
         loadEmails() {
             emailService.query()
                 .then(emails => {
+                    // const emailsToShow = emails.filter(email => !email.isSent && !email.isDeleted && !email.isDraft);
                     // console.log(emails);
-                    this.emails = emails;
+                    this.emails = emails; //was emails
                 });
+
         },
 
         setFilter(filterBy) {
@@ -139,6 +141,7 @@ export default {
 
             // console.log('emailsToShow', emailsToShow);
 
+
             if (this.filterBy.emailStatus !== '') {
 
                 if (this.filterBy.emailStatus === 'read')
@@ -209,7 +212,18 @@ export default {
 
             console.log(emailsShow);
             // return emailsShow;
-        }
+        },
+        // '$route': {
+        //     handler() {
+        //         this.composeEmail = true;
+        //         console.log(this.$route.query);
+        //         this.replyToCompose.to = this.$route.query.to
+        //         this.replyToCompose.subject = this.$route.query.subject
+        //         this.replyToCompose.body = this.$route.query.body
+        //     },
+        //     immediate: true
+
+        // },
     },
 
     components: {
