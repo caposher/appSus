@@ -15,7 +15,18 @@ export const emailService = {
   updateEmail,
   sendEmail,
   getEmptyEmail,
+  saveEmailDraft,
 };
+
+function saveEmailDraft(draft) {
+  return getById(draft.id).then((email) => {
+    if (email) return storageService.put(EMAILS_KEY, draft);
+    else {
+      return storageService.post(EMAILS_KEY, draft);
+    }
+  });
+}
+
 function updateEmail(email) {
   return storageService.put(EMAILS_KEY, email);
 }
@@ -23,11 +34,11 @@ function updateEmail(email) {
 function removeEmail(emailId) {
   return getById(emailId).then((email) => {
     if (email.isDeleted) {
+      email.folder = 'trash';
       console.log('deleted', email);
       return storageService.remove(EMAILS_KEY, emailId);
     } else {
       email.isDeleted = true;
-      email.folder = 'trash';
       console.log('trashed', email);
       return storageService.put(EMAILS_KEY, email);
     }
@@ -36,7 +47,7 @@ function removeEmail(emailId) {
 
 // const criteria = { status: 'inbox/sent/trash/draft', txt: 'puki', // no need to support complex text search isRead: true, // (optional property, if missing: show all) isStared: true, // (optional property, if missing: show all) lables: ['important', 'romantic'] // has any of the labels }
 function query() {
-  return storageService.query(EMAILS_KEY).then((emails) => emails.reverse());
+  return storageService.query(EMAILS_KEY);
 }
 
 function getById(emailId) {
@@ -44,11 +55,14 @@ function getById(emailId) {
 }
 
 function sendEmail(email) {
+  // email.id = utilService.makeId(4);
   email.from = loggedUser.fullName;
   email.fromEmail = loggedUser.email;
   email.isRead = false;
+  // email.isSent = true;
   email.isStarred = false;
   email.isDeleted = false;
+  // email.isDraft =
   email.sentAt = Date.now();
   return storageService.post(EMAILS_KEY, email);
 }
@@ -57,6 +71,7 @@ function getEmptyEmail() {
   return {
     subject: '',
     body: '',
+    // isRead: false,
     sentAt: Date.now(),
     from: '',
     fromEmail: '',
@@ -121,7 +136,8 @@ function _createEmails() {
       {
         id: utilService.makeId(4),
         subject: 'Welcome to GitGuardian!',
-        body: `Thank you for trusting GitGuardian! We are now able to secure the repositories you grant us access to.\n As shown below, you are currently under our free tier for developers and Open Source. Additionally, you can start a 30-day trial of our Business plan, at any time, to secure your private collaborative repositories.`,
+        body: `Thank you for trusting GitGuardian! We are now able to secure the repositories you grant us access to.
+                As shown below, you are currently under our free tier for developers and Open Source. Additionally, you can start a 30-day trial of our Business plan, at any time, to secure your private collaborative repositories.`,
         // isRead: false,
         sentAt: 1551134830594,
         from: 'GitGuardian',
@@ -136,7 +152,8 @@ function _createEmails() {
       {
         id: utilService.makeId(4),
         subject: 'Your Dropbox is lonely. Add some files!',
-        body: `Add files to your Dropbox Once your files are in Dropbox, they’ll be waiting for you anywhere you install the app—like your computer, phone, or tablet. Your files will also be securely backed up and easy to share, no matter what type of files they are.`,
+        body: `Add files to your Dropbox.
+                Once your files are in Dropbox, they’ll be waiting for you anywhere you install the app—like your computer, phone, or tablet. Your files will also be securely backed up and easy to share, no matter what type of files they are.`,
         // isRead: false,
         sentAt: 1551134830594,
         from: 'Molly',

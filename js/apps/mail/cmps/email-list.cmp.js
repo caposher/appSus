@@ -5,7 +5,7 @@ export default {
     props: ['emails'],
     template: `
         <ul class="emails-list">
-                <email-preview @remove="deleteEmail" v-for="email in emails" :key="email.id" :email = "email"/>
+                <email-preview @remove="deleteEmail" @saveAsNote="saveEmailAsNote" v-for="email in emails" :key="email.id" :email = "email"/>
            
             <!-- </li> -->
         </ul>
@@ -13,6 +13,10 @@ export default {
     methods: {
         deleteEmail(emailId) {
             this.$emit('removeEmail', emailId);
+        },
+        saveEmailAsNote(email) {
+
+            this.$emit('sendEmailAsNote', email);
         }
     },
     components: {

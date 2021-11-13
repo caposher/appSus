@@ -15,7 +15,7 @@ export default {
             <div class="body"> - {{ formattedBodyText }} </div>
             <div class="sent-at"> {{ formattedDate }} </div>
             <div class="email-buttons">
-                <button @click= "toggleRead"> <i :class="classStyleRead"></i> </button>
+                <button @click.stop= "toggleRead"> <i :class="classStyleRead"></i> </button>
                 <!-- <i class="fas fa-envelope-open-text"></i> -->
                 <button @click= "deleteEmail(email.id)"> <i class="fas fa-trash"></i> </button>
             </div>
@@ -25,8 +25,8 @@ export default {
              <h3 class="small-preview-subject"> {{ email.subject }} </h3>
              <div class=small-preview-buttons>
                 <router-link :to="'email/' + email.id"> <i class="fas fa-expand"></i> </router-link>
-                <button @click.stop="replyToEmail" > <i class="fas fa-reply"></i> </button>
-                <button @click.stop="saveAsNote"> <i class="fas fa-paper-plane"></i> </button >
+                <button @click.stop="replyToEmail()" > <i class="fas fa-reply"></i> </button>
+                <button @click.stop="saveAsNote(email)"> <i class="fas fa-paper-plane"></i> </button >
                 <!-- <button @click.stop="deleteEmail(email.id)" title = "Delete" > <i class="fas fa-trash"></i> </button > -->
             </div >
          </div >
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       showEmail: false,
+      emailReply: null,
     };
   },
 
@@ -75,11 +76,13 @@ export default {
   },
 
   methods: {
+    //move to dad?
     toggleRead() {
       console.log('test');
       this.email.isRead = !this.email.isRead;
       emailService.updateEmail(this.email).then((email) => (this.email = email));
     },
+    //move to dad?
     toggleStar() {
       console.log('test');
       this.email.isStarred = !this.email.isStarred;
@@ -92,6 +95,24 @@ export default {
       this.showEmail = !this.showEmail;
       if (!this.email.isRead) this.email.isRead = true;
       console.log(this.showEmail);
+    },
+    saveAsNote(email) {
+      this.$emit('saveAsNote', email);
+    },
+    replyToEmail() {
+      //            this.$router.push('/keep');
+      // console.log('this.$route.path', this.$route.path)
+      // console.log('this.$route.params', this.$route.params);
+      // console.log('this.$router.history.current.query', this.$router.history.current.query);
+      // // if (this.$route.path !== '/compose')
+      // //     this.$router.push(`compose?from=${email.fromEmail}&subject=Re:${email.subject}&body=${email.body}`);
+      // const { emailId } = this.$route.params;
+      // emailService.getById(emailId)
+      //     .then(email => {
+      //         this.emailReply = email;
+      //     })
+      // const mail = this.emailReply;
+      // this.$router.push(`compose&&from=${mail.fromEmail}&subject=Re:${mail.subject}&body=${mail.body}`);
     },
   },
 
