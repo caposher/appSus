@@ -1,6 +1,3 @@
-// import { eventBus } from "../../../services/event-bus-service";
-// import { emailService } from "../service/email-service";
-
 export default {
   name: 'email-folder-list',
   props: ['emails'],
@@ -11,7 +8,6 @@ export default {
                 <div class="inbox-folder" @click= "openFolder('inbox')" :class="{styleFolder: this.currFolder==='inbox'}">
                     <span> <i class="fas fa-inbox"></i> </span> 
                     Inbox
-                    <!-- <span>{{emailsUnread}}</span> -->
                 </div>
                 <div class="starred-folder" @click= "openFolder('starred')" :class="{styleFolder: this.currFolder==='starred'}">
                     <span> <i class="fas fa-star"></i> </span>
@@ -30,14 +26,7 @@ export default {
                     Trash
                 </div>
             </div>
-            <!-- <div>
-                <p style="width:80%" data-value="80"></p>
-                <progress max="100" value="80" class="html5">
-                    <div class="progress-bar">
-                        <span style="width: 80%">80%</span>
-                    </div>
-                </progress>
-            </div> -->
+           
       
         </section>
     `,
@@ -54,12 +43,7 @@ export default {
     },
     composeEmail() {
       this.$emit('compose');
-      this.$router.push('compose'); //
-
-      // if (this.isDraftOpen) return
-      // eventBus.$emit('openCompose')
-      // eventBus.$emit('composeEmail')
-      // this.isDraft = true;
+      this.$router.push('compose');
     },
   },
   computed: {

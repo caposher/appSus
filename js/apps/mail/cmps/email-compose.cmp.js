@@ -21,7 +21,6 @@ export default {
                     </textarea>    
                 </div>
                 <div class="compose-buttons-container"> 
-                    <!-- <button class="send-email-btn" :disabled="!isValid" @click.stop="sendMail"> Send </button> -->
                     <button class="send-email-btn"> Send </button>
                     <button type="button" class="del-compose-email-btn" @click="deleteCompose"> <i class="fas fa-trash"></i> </button>
                 </div>
@@ -32,7 +31,6 @@ export default {
   data() {
     return {
       email: null,
-      // saveDraft: false
       isSaveDraft: false,
       emailToReply: null,
     };
@@ -46,9 +44,6 @@ export default {
     const { emailId } = this.$route.params;
     if (emailId) {
       emailService.getById(emailId).then((email) => (this.emailToReply = email));
-      // } else {
-      //     this.carToEdit = carService.getEmptyCar();
-      // }
     }
   },
 
@@ -56,13 +51,6 @@ export default {
     this.$refs.to.focus();
   },
   methods: {
-    // exitAndSaveDraft() {
-    //     // this.saveDraft();
-    //     // this.$router.push('/email');
-    //     // composeEmail = false;
-    //     this.$emit('close');
-    //     this.$router.push('/email')
-
     sendEmail() {
       this.$emit('send', this.email);
       this.$router.push('/email');
@@ -83,7 +71,6 @@ export default {
     saveDraft() {
       if (this.email.to || this.email.subject || this.email.body) {
         this.email.isDraft = true;
-        // emailService.saveEmailDraft(this.email)
         emailService
           .sendEmail(this.email)
           .then(() => {
@@ -105,8 +92,6 @@ export default {
             };
             eventBus.$emit('showMsg', msg);
           });
-
-        // this.$router.push('/email');
       }
     },
   },
