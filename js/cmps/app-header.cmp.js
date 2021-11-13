@@ -7,7 +7,7 @@ export default {
     <h2>AppSus</h2>
 </div >
     <nav class="dashboard" @click="toggleList">
-      <img  src="../imgs/dashboard.png">
+      <img  src="imgs/dashboard.png">
       <div v-show="showList" class="naviagtion">
         <router-link  to="/"><i class="fas fa-home"></i></router-link>
         <router-link @click="showList = false" to="/book"><i class="fas fa-book"></i></router-link>
