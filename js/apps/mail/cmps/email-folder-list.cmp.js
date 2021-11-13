@@ -1,10 +1,10 @@
 export default {
   name: 'email-folder-list',
-  props: ['emails'],
+  props: ['emails', 'show'],
   template: `
         <section class="side email-folders-container">
             <button class="compose-btn" @click="composeEmail"><img src="imgs/compose.png"/><p>Compose</p></button>
-            <div class="email-folders">    
+            <div v-show="show" class="email-folders">    
                 <div class="inbox-folder" @click= "openFolder('inbox')" :class="{styleFolder: this.currFolder==='inbox'}">
                     <span> <i class="fas fa-inbox"></i> </span> 
                     Inbox

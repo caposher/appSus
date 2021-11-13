@@ -9,16 +9,18 @@ import { notesService } from '../../keep/service/notes.service.js';
 export default {
   template: `
         <section v-if="emails" class="email-app main-content">
-            <email-folder-list @folderUpdate="openRelevantFolder" @compose="isCompose"
+          <div @click="openNav=false" v-show="openNav" class="screen"></div>
+            <email-folder-list :show="openNav" @folderUpdate="openRelevantFolder" @compose="isCompose"
              :emails="emails"/>
 
-             <!-- <nav @click = "toggleFilters" class = "nav-container" >
-                <button  class="menu-btn" >☰</button> -->
+              <div @click="toggleMenu" class = "nav-container" >
+                <button  class="menu-btn" >☰</button>
+              </div>
             <div class="email-content">
                 <!-- <button class="menu-btn" v-on:click="toggleMenu">☰</button> -->
                 <email-filter @filtered="setFilter"/>
                 <email-list @removeEmail="removeEmailFromList" @sendEmailAsNote="sendAsNote" :emails="emailsToShow" />
-                <email-compose v-if="composeEmail" :replyCompose="replyToCompose" :composeEmail = "composeEmail" @close="closeComposeEmail" @send="sendEmail" @deleteCompose="composeEmail=false" @openReplyCompose="composeEmail=true"/>
+                <email-compose v-if="composeEmail"  :composeEmail = "composeEmail" @close="closeComposeEmail" @send="sendEmail" @deleteCompose="composeEmail=false" @openReplyCompose="composeEmail=true"/>
             </div>
         </section>
     `,
@@ -33,6 +35,7 @@ export default {
       composeEmail: false,
       // replyToCompose: null,
       unreadEmails: 0,
+      openNav: false,
     };
   },
 
@@ -118,6 +121,7 @@ export default {
         });
     },
     toggleMenu() {
+      console.log('click');
       this.openNav = !this.openNav;
     },
   },
