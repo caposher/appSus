@@ -2,6 +2,7 @@ import homePage from './pages/home-page.cmp.js';
 import emailPage from '../js/apps/mail/pages/email-app.cmp.js';
 import keepPage from './pages/keep-app.cmp.js';
 import emailDetails from './apps/mail/pages/email-details.cmp.js';
+import emailCompose from './apps/mail/cmps/email-compose.cmp.js';
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/email',
     component: emailPage,
+    children: [{
+      path: '/compose',
+      component: emailCompose
+    }]
   },
   {
     path: '/email/:emailId',
@@ -25,5 +30,8 @@ const routes = [
     component: keepPage,
   },
 ];
+
+
+
 
 export const router = new VueRouter({ routes });

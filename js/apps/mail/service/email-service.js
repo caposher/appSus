@@ -14,9 +14,22 @@ export const emailService = {
     removeEmail,
     updateEmail,
     sendEmail,
-    getEmptyEmail
+    getEmptyEmail,
+    saveEmailDraft
 
 }
+
+function saveEmailDraft(draft) {
+    return getById(draft.id)
+        .then(email => {
+            if (email) return storageService.put(EMAILS_KEY, draft)
+            else {
+                return storageService.post(EMAILS_KEY, draft);
+            }
+        })
+
+}
+
 function updateEmail(email) {
     return storageService.put(EMAILS_KEY, email);
 }
@@ -26,6 +39,7 @@ function removeEmail(emailId) {
     return getById(emailId)
         .then(email => {
             if (email.isDeleted) {
+                email.folder = 'trash';
                 console.log('deleted', email)
                 return storageService.remove(EMAILS_KEY, emailId);
             }
@@ -54,9 +68,10 @@ function sendEmail(email) {
     email.from = loggedUser.fullName;
     email.fromEmail = loggedUser.email;
     email.isRead = false;
-    email.isSent = true;
+    // email.isSent = true;
     email.isStarred = false;
     email.isDeleted = false;
+    // email.isDraft = 
     email.sentAt = Date.now();
     return storageService.post(EMAILS_KEY, email);
 }
@@ -146,7 +161,7 @@ function _createEmails() {
             {
                 id: utilService.makeId(4),
                 subject: 'Your Dropbox is lonely. Add some files!',
-                body: `Add files to your Dropbox
+                body: `Add files to your Dropbox.
                 Once your files are in Dropbox, they’ll be waiting for you anywhere you install the app—like your computer, phone, or tablet. Your files will also be securely backed up and easy to share, no matter what type of files they are.`,
                 // isRead: false,
                 sentAt: 1551134830594,
