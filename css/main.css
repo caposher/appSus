@@ -140,18 +140,6 @@ button {
   animation: bounce-in 1s reverse;
 }
 
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 @media (min-width: 500px) {
   .main-width {
     max-width: calc(100% - 200px);

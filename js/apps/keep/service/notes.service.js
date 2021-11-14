@@ -3,7 +3,7 @@ export const notesService = { getNotes, addNote, removeNote, updateNote, getEmpt
 
 const NOTES_KEY = 'notes';
 const gList = [
-  { id: 'n101', type: 'note-txt', isPinned: true, color: 'color5', info: { txt: 'osher cappelli' } },
+  { id: 'n101', type: 'note-txt', isPinned: false, color: 'color5', info: { txt: 'osher cappelli' } },
   {
     type: 'note-video',
     isPinned: false,
@@ -14,7 +14,7 @@ const gList = [
   {
     id: 'n104',
     type: 'note-txt',
-    isPinned: false,
+    isPinned: true,
     color: 'color4',
     info: {
       txt: 'The Plage de Coco, or Coco Beach, is one of the less well-known and less frequented beaches in Nice. \nSo, if you are also looking for some relaxation during your stay, this is the place to be. \nUnlike the other beaches, Coco Beach is not just a pebble beach, but also a rocky beach. \nIt is quite unspoilt and at some points you can only get into the water via a ladder. \nThe way there is also a bit steeper, but the little effort definitely pays off in the end!',
@@ -23,8 +23,8 @@ const gList = [
   {
     id: 'n105',
     type: 'note-txt',
-    isPinned: false,
-    color: 'color5',
+    isPinned: true,
+    color: 'color3',
     info: { txt: 'object is a function that return data... right? 🤔 wait... ' },
   },
   {
@@ -38,8 +38,8 @@ const gList = [
   },
   {
     type: 'note-txt',
-    isPinned: true,
-    color: 'color1',
+    isPinned: false,
+    color: 'color6',
     info: {
       txt: 'credit card: 4580 0107 7065 5244\ncar: *4344\nemail: jojoCorona@gmail.com Joco123\nleumi: Gmpj1hks money123456789\n',
     },
@@ -47,7 +47,7 @@ const gList = [
   },
   {
     type: 'note-img',
-    isPinned: true,
+    isPinned: false,
     color: 'color3',
     info: {
       txt: 'https://64.media.tumblr.com/c03e4e16c71fd39dcfba44219b761b78/76a476a5d0a9ef4b-b5/s1280x1920/adf8d5651ee532ac3a422bf1b768a6f126d1fd40.png',
@@ -63,7 +63,7 @@ const gList = [
   },
   {
     type: 'note-img',
-    isPinned: false,
+    isPinned: true,
     color: 'color1',
     info: { txt: 'https://www.ilovestyle.com/sites/default/files/sitefiles_2018-04/cat_vr.jpg' },
     id: 'RHduw',
