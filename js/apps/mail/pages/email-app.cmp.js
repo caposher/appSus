@@ -8,7 +8,7 @@ import { notesService } from '../../keep/service/notes.service.js';
 
 export default {
   template: `
-        <section v-if="emails" class="email-app main-content">
+        <section v-if="emails" class="email-app">
           <div @click="openNav=false" v-show="openNav" class="screen"></div>
             <email-folder-list :show="openNav" @folderUpdate="openRelevantFolder" @compose="isCompose"
              :emails="emails"/>
@@ -60,6 +60,7 @@ export default {
         .removeEmail(emailId)
         .then(() => {
           this.emails = this.emails.filter((email) => email.id !== emailId);
+          this.loadEmails();
           // this.composeEmail = false;
           const msg = {
             txt: `Email was removed`,
@@ -153,14 +154,17 @@ export default {
       }
       //changed
       else if (this.folder === 'starred') {
-        emailsToShow = emailsToShow.filter((email) => email.isStarred);
+        emailsToShow = emailsToShow.filter((email) => email.isStarred && !email.isDeleted && !email.isDraft);
       } else if (this.folder === 'sent') {
         emailsToShow = emailsToShow.filter((email) => email.isSent && !email.isDeleted);
       } else if (this.folder === 'trash') {
-        emailsToShow = this.emails.filter((email) => email.isDeleted);
+        // emailsToShow = this.emails.filter((email) => email.isDeleted);
+        emailsToShow = emailsToShow.filter((email) => email.isDeleted);
+
         console.log('emailsIsTrashed', emailsToShow);
       } else if (this.folder === 'drafts') {
-        emailsToShow = this.emails.filter((email) => email.isDraft && !email.isSent);
+        // emailsToShow = this.emails.filter((email) => email.isDraft && !email.isSent);
+        emailsToShow = emailsToShow.filter((email) => email.isDraft && !email.isSent && !email.isDeleted);
         console.log('emailsIsDrafts', emailsToShow);
       }
       // emailsToShow = emailsToShow.filter(email =>
@@ -173,41 +177,46 @@ export default {
     },
   },
   watch: {
-    folder() {
-      this.loadEmails();
-      var emailsShow;
-      if (this.folder === 'inbox') {
-        emailsShow = this.emails.filter((email) => !email.isSent);
-        this.emails = emailsShow;
-      } else if (this.folder === 'starred') {
-        emailsShow = this.emails.filter((email) => email.isStarred);
-        this.emails = emailsShow;
-        console.log(emailsShow);
-      } else if (this.folder === 'sent') {
-        emailsShow = this.emails.filter((email) => email.isSent);
-        this.emails = emailsShow;
-        console.log(emailsShow);
-      } else if (this.folder === 'drafts') {
-        emailsShow = this.emails.filter((email) => email.isDraft);
-        this.emails = emailsShow;
-        console.log(emailsShow);
-      }
-
-      console.log(emailsShow);
-      // return emailsShow;
-    },
-    // '$route': {
-    //     handler() {
-    //         this.composeEmail = true;
-    //         console.log(this.$route.query);
-    //         this.replyToCompose.to = this.$route.query.to
-    //         this.replyToCompose.subject = this.$route.query.subject
-    //         this.replyToCompose.body = this.$route.query.body
-    //     },
-    //     immediate: true
-
-    // },
+    // folder() {
+    //   this.loadEmails();
+    // }
   },
+  // watch: {
+  //   folder() {
+  //     this.loadEmails();
+  //     var emailsShow;
+  //     if (this.folder === 'inbox') {
+  //       emailsShow = this.emails.filter((email) => !email.isSent);
+  //       this.emails = emailsShow;
+  //     } else if (this.folder === 'starred') {
+  //       emailsShow = this.emails.filter((email) => email.isStarred);
+  //       this.emails = emailsShow;
+  //       console.log(emailsShow);
+  //     } else if (this.folder === 'sent') {
+  //       emailsShow = this.emails.filter((email) => email.isSent);
+  //       this.emails = emailsShow;
+  //       console.log(emailsShow);
+  //     } else if (this.folder === 'drafts') {
+  //       emailsShow = this.emails.filter((email) => email.isDraft);
+  //       this.emails = emailsShow;
+  //       console.log(emailsShow);
+  //     }
+
+  //     console.log(emailsShow);
+  //     // return emailsShow;
+  //   },
+  // '$route': {
+  //     handler() {
+  //         this.composeEmail = true;
+  //         console.log(this.$route.query);
+  //         this.replyToCompose.to = this.$route.query.to
+  //         this.replyToCompose.subject = this.$route.query.subject
+  //         this.replyToCompose.body = this.$route.query.body
+  //     },
+  //     immediate: true
+
+  // },
+  // },
 
   components: {
     emailList,

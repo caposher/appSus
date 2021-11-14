@@ -11,7 +11,7 @@ export default {
             </button>
             <div class="from"> {{ email.from }} </div>
             <div class="subject"> {{ formattedSubjectText }} </div>
-            <div class="body"> - {{ formattedBodyText }} </div>
+            <div class="body"> - {{ formattedBodyText }} ... </div>
             <div class="sent-at"> {{ formattedDate }} </div>
             <div class="email-buttons">
                 <button @click.stop= "toggleRead"> <i :class="classStyleRead"></i> </button>
@@ -23,7 +23,7 @@ export default {
              <h3 class="small-preview-subject"> {{ email.subject }} </h3>
              <div class=small-preview-buttons>
                 <router-link :to="'email/' + email.id"> <i class="fas fa-expand"></i> </router-link>
-                <button @click.stop="replyToEmail(email)" > <i class="fas fa-reply"></i> </button>
+                <!-- <button @click.stop="replyToEmail(email)" > <i class="fas fa-reply"></i> </button> -->
                 <button @click.stop="saveAsNote(email)"> <i class="fas fa-paper-plane"></i> </button >
             </div >
          </div >
@@ -43,14 +43,17 @@ export default {
   computed: {
     formattedDate() {
       var dateObj = new Date();
+      var date = this.email.sentAt;
       var month = dateObj.getUTCMonth() + 1; //months from 1-12
       var day = dateObj.getUTCDate();
       var year = dateObj.getUTCFullYear();
       var newdate = day + '/' + month + '/' + year;
-      return new Date().toString().slice(4, 7) + ' ' + day; //month
+      // return new Date().toString().slice(4, 7) + ' ' + day; //month
+      // return new Date().toString().slice(4, 7) + ' ' + day; //month
+      return new Date(this.email.sentAt).toDateString().slice(4, 10)
     },
     formattedBodyText() {
-      return this.email.body;
+      return this.email.body.slice(0, 100);
     },
     formattedSubjectText() {
       return this.email.subject;
