@@ -6,27 +6,24 @@ import emailFilter from '../cmps/email-filter.cmp.js';
 
 export default {
     template: `
-        <section v-if="email" class="email-details email-app app-main"> 
+        <section v-if="email" class="email-details email-app app-main main-content"> 
 
         <email-folder-list/>
-
-             <!-- <nav @click = "toggleFilters" class = "nav-container" >
-                <button  class="menu-btn" >☰</button> -->
-            <div class="email-content">
-                <!-- <button class="menu-btn" v-on:click="toggleMenu">☰</button> -->
-                <email-filter/>
+            <div class="email-content ">
+            <email-filter/>
 
             <!-- <button @click="sayAndClose" >X</button> -->
             <!-- <button @click="sayAndClose"><router-link :to="/email/"><i class="fas fa-long-arrow-alt-left"></i></router-link></button>  -->
-
-            <button @click="sayAndClose"><i class="fas fa-long-arrow-alt-left"></i></button> 
-            
-            <h2>{{email.subject}}</h2>
-            <div class="email-name">
-                <h4>{{email.name}}</h4>
-                <p>{{email.from}}</p>
-            </div>
-            <p>{{email.body}}</p>
+                 <div class="email-details">
+                    <button class="details-back-btn" @click="sayAndClose"><i class="fas fa-long-arrow-alt-left"></i></button> 
+                    <button class="details-delete-btn"><i class="fas fa-trash" @click="deleteEmail(email.id)"></i></button>
+                    <h2 class="details-subject">{{email.subject}}</h2>
+                    <div class="details-email-name">
+                        <h4>{{email.from}} </h4>
+                        <p> <{{email.fromEmail}}> </p>
+                    </div>
+                    <p class="details-body">{{email.body}}</p>
+                </div>
             </div>
 
         </section>
@@ -57,8 +54,31 @@ export default {
             console.log('Just saying');
             this.$router.push('/email');
             this.email = null;
-
         },
+        deleteEmail(emailId) {
+            emailService
+                .removeEmail(emailId)
+                .then(() => {
+                    // this.emails = this.emails.filter((email) => email.id !== emailId);
+                    // this.composeEmail = false;
+                    const msg = {
+                        txt: `Email was removed`,
+                        type: 'success',
+                    };
+                    eventBus.$emit('showMsg', msg);
+                })
+                .catch((err) => {
+                    console.log('err', err);
+                    const msg = {
+                        txt: 'Error. Please try later',
+                        type: 'error',
+                    };
+                    eventBus.$emit('showMsg', msg);
+                });
+
+            this.$router.push('/email');
+        }
+
     },
     components: {
         emailFolderList,

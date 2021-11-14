@@ -2,14 +2,17 @@
 
 .book-app {
   min-height: 80vh;
-  background-color: lightgray;
+  /* background-color: lightgray; */
+  /* background-color: hsl(211, 100%, 96%); */
+  background-color: hsl(214deg 53% 90%);
 }
 
 /* filter */
 
 .book-filter {
   padding: 20px;
-  background-color: hsl(0deg 0% 69%);
+  /* background-color: hsl(0deg 0% 69%); */
+  background-color: rgb(113 184 243 / 66%);
   text-align: center;
   display: flex;
   justify-content: center;
@@ -41,7 +44,8 @@
 
 .book-details {
   padding: 20px;
-  background-color: lightgray;
+  /* background-color: lightgray; */
+  background-color: hsl(214deg 53% 90%);
   text-align: center;
   position: relative;
 }
@@ -93,7 +97,9 @@
   flex-direction: column;
   justify-content: space-between;
 
-  background-color: rgba(226, 226, 226, 0.9);
+  /* background-color: rgba(226, 226, 226, 0.9); */
+  /* background-color: rgb(113 204 243 / 37%); */
+  background-color: rgb(113 184 243 / 66%);
   width: 25%;
   height: 350px;
   max-width: 250px;
@@ -133,9 +139,10 @@
   width: 10rem;
   padding: 0.75rem;
   text-transform: uppercase;
-  color: white;
+  color: ghostwhite;
   border: none;
-  background-color: rgb(49, 49, 49);
+  /* background-color: rgb(49, 49, 49); */
+  background-color: rgb(13 22 66 / 82%);
 }
 
 .page-btns-container {
